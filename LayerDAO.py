@@ -6,8 +6,6 @@ def getConnection():
     # tạo đối tượng connection
     myconn = mysql.connector.connect(host = "127.0.0.1", user = "jstD",
         password = "Dung_2000", database = "NNLTTT")
-    if myconn:
-        print("successful!!!")
     return myconn
                                                                
 def findAll(sql):
@@ -144,6 +142,4 @@ def updateBox(Date_Old):
         myconn.commit()
         return 1
     except:
-        return 0   
-
-
+        return 0 

@@ -12,7 +12,6 @@ from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
 from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
 from PySide2.QtWidgets import *
-from spellchecker import SpellChecker
 # GUI FILE
 from ui_main import Ui_MainWindow
 
@@ -20,7 +19,6 @@ from ui_main import Ui_MainWindow
 from ui_functions import *
 
 from random import shuffle
-spell = SpellChecker()
 
 class MainWindow(QMainWindow):
     # List lưu trữ 5 từ vựng mỗi Box
