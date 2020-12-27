@@ -12,6 +12,8 @@ from LayerDAO import *
 from Model import Word
 import speech_recognition
 import pyttsx3
+from spellchecker import SpellChecker
+spell = SpellChecker()
 def showdialog(mess):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
@@ -132,6 +134,7 @@ class UIFunctions(MainWindow):
         self.ui.txtVocabulary.setText("")
         #self.ui.txtVoice.setText("")
         # Kiểm tra xem hôm nay đã luyện tập xong chưa
+        # self.findListPractice()
         if len(self.ui.lstPractice)==0:
             showdialog("Hôm nay bạn đã hoàn thành bài tập rồi!")
             self.ui.stackedWidget.setCurrentWidget(self.ui.page_2)
@@ -141,7 +144,10 @@ class UIFunctions(MainWindow):
             #Hiển thị giá trị lên form
             word = self.ui.lstPractice[0]
             self.ui.txtMeans.setText(word[2])
-            self.ui.lblPicture.setStyleSheet("border-image : url(image/"+word[3]+");") 
+            if word[3]:
+                self.ui.lblPicture.setStyleSheet("border-image : url(image/"+word[3]+");") 
+            else:
+                self.ui.lblPicture.setStyleSheet("border-image : url(image/000.jpg);") 
     #Hàm kiểm tra xem câu trả lời có chính xác hay không
     def isCorrect(self,vocabulary):
 
@@ -179,9 +185,14 @@ class UIFunctions(MainWindow):
     # Đọc từ vựng ở trong ô text
     def speaking(self):
         voca = self.ui.txtVocabulary.toPlainText()
-        robot_mouth = pyttsx3.init()
-        robot_mouth.say(voca)
-        robot_mouth.runAndWait()
+        if(spell.correction(voca)==voca):
+            robot_mouth = pyttsx3.init()
+            robot_mouth.say(voca)
+            robot_mouth.runAndWait()
+        else:
+            robot_mouth = pyttsx3.init()
+            robot_mouth.say("You are wrong")
+            robot_mouth.runAndWait()
         
     #Xem lại những từ đã trả lời đúng và đã trả lời sai
     def reviewVocabulary(self):

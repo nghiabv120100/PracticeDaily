@@ -4,8 +4,10 @@ import mysql.connector
 from _datetime import date
 def getConnection():
     # tạo đối tượng connection
-    myconn = mysql.connector.connect(host = "localhost", user = "root", 
-        passwd = "123456", database = "nnlttt")
+    myconn = mysql.connector.connect(host = "127.0.0.1", user = "jstD",
+        password = "Dung_2000", database = "NNLTTT")
+    if myconn:
+        print("successful!!!")
     return myconn
                                                                
 def findAll(sql):
@@ -20,8 +22,8 @@ def findAll(sql):
 def delete(id):
     myconn=getConnection()
     cur = myconn.cursor()
-    sql1="Delete from Review where id_Word = %s"     # Xoá những từ trong bảng review do có liên kết khoá ngoại
-    sql2="Delete from Word where id = %s"       # Xoá từ có id=id
+    sql1="Delete from review where id_Word = %s"     # Xoá những từ trong bảng review do có liên kết khoá ngoại
+    sql2="Delete from word where id = %s"       # Xoá từ có id=id
     par =(id,)
     try:
         cur.execute(sql1,par)
@@ -36,7 +38,7 @@ def delete(id):
 def find_by_level_box(level):
     myconn=getConnection()
     cur = myconn.cursor()
-    sql = "select * from Word where level_box= %s"
+    sql = "select * from word where level_box= %s"
     par =(level,)
     cur.execute(sql,par)
     myresult = cur.fetchall()
@@ -45,7 +47,7 @@ def find_by_level_box(level):
 def add(word):
     myconn=getConnection()
     cur = myconn.cursor()
-    sql="Insert into Word(vocabulary,means,image,level_box,part_of_speech) values(%s,%s,%s,%s,%s)"
+    sql="Insert into word(vocabulary,means,image,level_box,part_of_speech) values(%s,%s,%s,%s,%s)"
     par =(word.vocabulary,word.means,word.image,word.level_box,word.part_of_speech)
     try:
         cur.execute(sql,par)
@@ -57,7 +59,7 @@ def add(word):
 def move(id):
     myconn=getConnection()
     cur = myconn.cursor()
-    sql="Update Word set level_box=1 where id=%s"
+    sql="Update word set level_box=1 where id=%s"
     par =(id,)
     try:
         cur.execute(sql,par)
@@ -69,7 +71,7 @@ def move(id):
 def update(word):
     myconn=getConnection()
     cur = myconn.cursor()
-    sql="Update Word set vocabulary=%s,means=%s,image=%s,level_box=%s,part_of_speech=%s where id=%s"
+    sql="Update word set vocabulary=%s,means=%s,image=%s,level_box=%s,part_of_speech=%s where id=%s"
     par =(word.vocabulary,word.means,word.image,word.level_box,word.part_of_speech,word.id)
     try:
         cur.execute(sql,par)
@@ -94,7 +96,7 @@ def findMaxDate():
 def addReview(id):
     myconn=getConnection()
     cur = myconn.cursor()
-    sql="Insert into Review(id_Word) values(%s)"
+    sql="Insert into review(id_Word) values(%s)"
     par =(id,)
     try:
         cur.execute(sql,par)
@@ -114,6 +116,7 @@ def findPractice(status,level):
     par =(status,level,date.today())
     cur.execute(sql,par)
     myresult = cur.fetchall()
+    print(myresult)
     return myresult
     
 # Cập nhật status là 1 nếu trả lời đúng, 0 nếu trả lời sai
