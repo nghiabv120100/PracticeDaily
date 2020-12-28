@@ -144,7 +144,7 @@ class MainWindow(QMainWindow):
         #Đọc từ vựng ở trong ô text
         self.ui.btnSpeak.clicked.connect(lambda: UIFunctions.speaking(self))
 
-        self.ui.Btn_Toggle.clicked.connect(lambda:UIFunctions.hideButton(self))
+        #self.ui.Btn_Toggle.clicked.connect(lambda:UIFunctions.hideButton(self))
         #self.ui.btn_page_3.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_3))
 
 
