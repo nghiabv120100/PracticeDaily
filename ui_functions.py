@@ -13,7 +13,11 @@ from Model import Word
 import speech_recognition
 import pyttsx3
 from spellchecker import SpellChecker
+import PySide2
 spell = SpellChecker()
+
+
+
 def showdialog(mess):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
@@ -22,11 +26,25 @@ def showdialog(mess):
         #msg.setInformativeText("This is additional information")
         msg.setWindowTitle("Notification")
         #msg.setDetailedText("The details are as follows:")
-        msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        msg.setStandardButtons(QMessageBox.Ok)
         retval = msg.exec_()
+
 class UIFunctions(MainWindow):
     #Hiển thị thông báo
-    
+    def message_box(self):
+
+        msg = QMessageBox()
+        # # msg.setText("Message has been sended")
+        # # msg.setWindowTitle("SENT")
+        msg.setStyleSheet("background: rgb(0, 0, 255);")
+        msg.setStyleSheet("color: rgb(255, 255, 255);")
+
+        resp = msg.question(self,'Notification', 'Do you want to quit?', QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        
+        if resp == PySide2.QtWidgets.QMessageBox.StandardButton.Yes:
+            self.close()
+        else:
+            pass
     def toggleMenu(self, maxWidth, enable):
         if enable:
 

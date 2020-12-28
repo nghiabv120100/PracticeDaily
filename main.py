@@ -45,23 +45,23 @@ class MainWindow(QMainWindow):
             print(lstBox1)
             print("nghia")
             shuffle(lstBox1)
-            lstPracticeBox1=lstBox1[0:5]
+            lstPracticeBox1=lstBox1[0:numwords]
             ############################
             lstBox2 = find_by_level_box(2)
             shuffle(lstBox2)
-            lstPracticeBox2=lstBox2[0:5]
+            lstPracticeBox2=lstBox2[0:numwords]
             #############################
             lstBox3 = find_by_level_box(3)
             shuffle(lstBox3)
-            lstPracticeBox3=lstBox3[0:5]
+            lstPracticeBox3=lstBox3[0:numwords]
             #############################
             lstBox4 = find_by_level_box(4)
             shuffle(lstBox4)
-            lstPracticeBox4=lstBox4[0:5]
+            lstPracticeBox4=lstBox4[0:numwords]
             #############################
             lstBox5 = find_by_level_box(5)
             shuffle(lstBox5)
-            lstPracticeBox5=lstBox5[0:5]
+            lstPracticeBox5=lstBox5[0:numwords]
             #############################
             #insert vào mỗi Box 5 từ 
             for item in lstPracticeBox1:
@@ -145,6 +145,9 @@ class MainWindow(QMainWindow):
         self.ui.btnCancel.clicked.connect(lambda:UIFunctions.mapping(self,self.ui.level))
         #Đọc từ vựng ở trong ô text
         self.ui.btnSpeak.clicked.connect(lambda: UIFunctions.speaking(self))
+
+        #Quit để thoát ứng dụng
+        self.ui.btnQuit.clicked.connect( lambda:UIFunctions.message_box(self))
 
         #self.ui.Btn_Toggle.clicked.connect(lambda:UIFunctions.hideButton(self))
         #self.ui.btn_page_3.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_3))

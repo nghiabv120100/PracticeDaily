@@ -131,10 +131,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.btn_review)
         #Tạo button Cancel
-        self.btn_cancel = QPushButton(self.frame_toggle)
-        self.btn_cancel.setObjectName(u"btn_cancel")
-        self.btn_cancel.setMinimumSize(QSize(0, 40))
-        self.btn_cancel.setStyleSheet(u"QPushButton {\n"
+        self.btnQuit = QPushButton(self.frame_toggle)
+        self.btnQuit.setObjectName(u"btnQuit")
+        self.btnQuit.setMinimumSize(QSize(0, 40))
+        self.btnQuit.setStyleSheet(u"QPushButton {\n"
 "	color: rgb(255, 255, 255);\n"
 "	background-color: rgb(35, 35, 35);\n"
 "	border: 0px solid;\n"
@@ -143,7 +143,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(85, 170, 255);\n"
 "}")
 
-        self.horizontalLayout.addWidget(self.btn_cancel)
+        self.horizontalLayout.addWidget(self.btnQuit)
         
         ##############
 
@@ -544,7 +544,7 @@ class Ui_MainWindow(object):
         self.btn_delete.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
         self.btn_practice.setText(QCoreApplication.translate("MainWindow", u"Practice", None))
         self.btn_review.setText(QCoreApplication.translate("MainWindow", u"Review", None))
-        self.btn_cancel.setText(QCoreApplication.translate("MainWindow", u"Cancel", None))
+        self.btnQuit.setText(QCoreApplication.translate("MainWindow", u"Cancel", None))
         # self.label_1.setText(QCoreApplication.translate("MainWindow", u"PAGE 1", None))
         # self.label_2.setText(QCoreApplication.translate("MainWindow", u"PAGE 2", None))
         #self.label.setText(QCoreApplication.translate("MainWindow", u"PAGE 3", None))
