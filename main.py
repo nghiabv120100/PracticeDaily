@@ -243,10 +243,17 @@ class Ui_Form(object):
                 self.label.setText(_translate("Form", "Vui lòng chọn độ khó để tiếp tục."))
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
+        Date_Now = date.today()
+        Date_Old = findMaxDate()
+        app = QApplication(sys.argv)
 
+        print(Date_Now)
+        print(Date_Old)
+        if Date_Now > Date_Old:
+                Form = QtWidgets.QWidget()
+                ui = Ui_Form()
+                ui.setupUi(Form)
+                Form.show()
+        else:
+                MainWindow()
+        sys.exit(app.exec_())                
