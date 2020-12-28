@@ -16,12 +16,12 @@ from PySide2.QtWidgets import *
 from ui_main import Ui_MainWindow
 # IMPORT FUNCTIONS
 from ui_functions import *
-
+import threading
 from random import shuffle
 # from frmStart import *
+from PyQt5 import QtCore, QtGui, QtWidgets
 
-
-
+numwords = 0
 class MainWindow(QMainWindow):
     # List lưu trữ 5 từ vựng mỗi Box
     lstPracticeBox1=[]
@@ -155,12 +155,93 @@ class MainWindow(QMainWindow):
         
         self.show()
         ## ==> END ##
+class Ui_Form(object):
+        def setupUi(self, Form):
+                def easyLevel():
+                        print(1)
+                        numwords = 3
+                        Form.setHidden(True)
+                        MainWindow()
+                def mediumLevel():
+                        print(2)
+                        numwords = 5
+                        Form.setHidden(True)
+                        MainWindow()
+                def hardLevel():
+                        print(3)
+                        numwords = 10
+                        Form.setHidden(True)
+                        MainWindow()
+                Form.setObjectName("Form")
+                Form.resize(403, 505)
+                sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
+                sizePolicy.setHorizontalStretch(0)
+                sizePolicy.setVerticalStretch(0)
+                sizePolicy.setHeightForWidth(Form.sizePolicy().hasHeightForWidth())
+                Form.setSizePolicy(sizePolicy)
+                Form.setAutoFillBackground(False)
+                Form.setStyleSheet("background:rgb(2, 14, 30) ")
+                self.btnEasy = QtWidgets.QPushButton(Form)
+                self.btnEasy.setGeometry(QtCore.QRect(20, 20, 361, 131))
+                self.btnEasy.clicked.connect(easyLevel)
+                font = QtGui.QFont()
+                font.setPointSize(20)
+                font.setBold(True)
+                font.setWeight(75)
+                self.btnEasy.setFont(font)
+                self.btnEasy.setStyleSheet("background:rgb(85, 170, 255);\n"
+        "color:rgb(255, 255, 255)")
+                self.btnEasy.setObjectName("btnEasy")
+                self.btnMedium = QtWidgets.QPushButton(Form)
+                self.btnMedium.setGeometry(QtCore.QRect(20, 160, 361, 131))
+                font = QtGui.QFont()
+                font.setPointSize(20)
+                font.setBold(True)
+                font.setWeight(75)
+                self.btnMedium.setFont(font)
+                self.btnMedium.setStyleSheet("background:rgb(85, 170, 255);\n"
+        "color:rgb(255, 255, 255)")
+                self.btnMedium.setObjectName("btnMedium")
+                self.btnHard = QtWidgets.QPushButton(Form)
+                self.btnMedium.clicked.connect(mediumLevel)
+                self.btnHard.setGeometry(QtCore.QRect(20, 300, 361, 131))
+                font = QtGui.QFont()
+                font.setPointSize(20)
+                font.setBold(True)
+                font.setWeight(75)
+                self.btnHard.setFont(font)
+                self.btnHard.setStyleSheet("background:rgb(85, 170, 255);\n"
+        "color:rgb(255, 255, 255)")
+                self.btnHard.setObjectName("btnHard")
+                self.label = QtWidgets.QLabel(Form)
+                self.btnHard.clicked.connect(hardLevel)
+                self.label.setGeometry(QtCore.QRect(30, 450, 341, 31))
+                sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
+                sizePolicy.setHorizontalStretch(0)
+                sizePolicy.setVerticalStretch(0)
+                sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
+                self.label.setSizePolicy(sizePolicy)
+                font = QtGui.QFont()
+                font.setPointSize(14)
+                self.label.setFont(font)
+                self.label.setStyleSheet("color:rgb(255, 255, 255)")
+                self.label.setObjectName("label")
+
+                self.retranslateUi(Form)
+                QtCore.QMetaObject.connectSlotsByName(Form)
+                
+        def retranslateUi(self, Form):
+                _translate = QtCore.QCoreApplication.translate
+                Form.setWindowTitle(_translate("Form", "Form"))
+                self.btnEasy.setText(_translate("Form", "Easy"))
+                self.btnMedium.setText(_translate("Form", "Medium"))
+                self.btnHard.setText(_translate("Form", "Hard"))
+                self.label.setText(_translate("Form", "Vui lòng chọn độ khó để tiếp tục."))
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    # Form = QtWidgets.QWidget()
-    # ui = Ui_Form()
-    # ui.setupUi(Form)
-    # Form.show()
-    window = MainWindow()
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
     sys.exit(app.exec_())
