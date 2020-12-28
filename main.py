@@ -32,7 +32,7 @@ class MainWindow(QMainWindow):
     def loadVocabulary(self):
         Date_Now = date.today()
         Date_Old = findMaxDate()
-
+        length=0
         print(Date_Now)
         print(Date_Old)
         if Date_Now > Date_Old:  
@@ -44,23 +44,33 @@ class MainWindow(QMainWindow):
             print(lstBox1)
             print("nghia")
             shuffle(lstBox1)
-            lstPracticeBox1=lstBox1[0:numwords]
+            if len(lstBox1) > 30: 
+                length=numwords+len(lstBox1)//10
+            lstPracticeBox1=lstBox1[0:length]
             ############################
             lstBox2 = find_by_level_box(2)
             shuffle(lstBox2)
-            lstPracticeBox2=lstBox2[0:numwords]
+            if len(lstBox1) > 30: 
+                length=numwords+len(lstBox1)//10           
+            lstPracticeBox2=lstBox2[0:length]
             #############################
             lstBox3 = find_by_level_box(3)
             shuffle(lstBox3)
-            lstPracticeBox3=lstBox3[0:numwords]
+            if len(lstBox1) > 30: 
+                length=numwords+len(lstBox1)//10
+            lstPracticeBox3=lstBox3[0:length]
             #############################
             lstBox4 = find_by_level_box(4)
             shuffle(lstBox4)
-            lstPracticeBox4=lstBox4[0:numwords]
+            if len(lstBox1) > 30: 
+                length=numwords+len(lstBox1)//10
+            lstPracticeBox4=lstBox4[0:length]
             #############################
             lstBox5 = find_by_level_box(5)
             shuffle(lstBox5)
-            lstPracticeBox5=lstBox5[0:numwords]
+            if len(lstBox1) > 30: 
+                length=numwords+len(lstBox1)//10
+            lstPracticeBox5=lstBox5[0:length]
             #############################
             #insert vào mỗi Box 5 từ 
             for item in lstPracticeBox1:
@@ -107,6 +117,9 @@ class MainWindow(QMainWindow):
         # Box 5
         self.ui.btn_page_6.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_2))
         self.ui.btn_page_6.clicked.connect(lambda:UIFunctions.mapping(self,5))
+        # Box Done
+        self.ui.btn_page_7.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_2))
+        self.ui.btn_page_7.clicked.connect(lambda:UIFunctions.mapping(self,6))
         # Box Custom
         self.ui.btnCustom.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_2))
         self.ui.btnCustom.clicked.connect(lambda:UIFunctions.mapping(self,0))

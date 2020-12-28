@@ -2,16 +2,16 @@
 from Model import Word
 import mysql.connector
 from _datetime import date
-# def getConnection():
-#     # tạo đối tượng connection
-#     myconn = mysql.connector.connect(host = "127.0.0.1", user = "root",
-#         password = "123456", database = "NNLTTT")
-#     return myconn
 def getConnection():
     # tạo đối tượng connection
-    myconn = mysql.connector.connect(host = "127.0.0.1", user = "jstD",
-        password = "Dung_2000", database = "NNLTTT")
+    myconn = mysql.connector.connect(host = "127.0.0.1", user = "root",
+        password = "123456", database = "NNLTTT")
     return myconn
+# def getConnection():
+#     # tạo đối tượng connection
+#     myconn = mysql.connector.connect(host = "127.0.0.1", user = "jstD",
+#         password = "Dung_2000", database = "NNLTTT")
+#     return myconn
                                                                
 def findAll(sql):
     # tạo đối tượng cursor
@@ -119,7 +119,6 @@ def findPractice(status,level):
     par =(status,level,date.today())
     cur.execute(sql,par)
     myresult = cur.fetchall()
-    print(myresult)
     return myresult
     
 # Cập nhật status là 1 nếu trả lời đúng, 0 nếu trả lời sai
