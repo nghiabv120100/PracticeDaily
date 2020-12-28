@@ -25,6 +25,7 @@ class Ui_MainWindow(object):
     lstCorrect=[]
     lstWrong=[]
     voice ="..."  # lưu speech to text
+    lstVoice=[] # Lưu danh sách từ phát âm
 
     def setupUi(self, MainWindow):
         if MainWindow.objectName():

@@ -168,7 +168,9 @@ class UIFunctions(MainWindow):
                 self.ui.lblPicture.setStyleSheet("border-image : url(image/000.jpg);") 
     #Hàm kiểm tra xem câu trả lời có chính xác hay không
     def isCorrect(self,vocabulary):
-
+        #Xoá hết từ xong danh sách vừa phát âm
+        self.ui.lstVoice.clear()
+        
         voca=self.ui.txtVocabulary.toPlainText()
         print(self.ui.voice)
         if voca =="" or self.ui.voice =="":
@@ -189,6 +191,9 @@ class UIFunctions(MainWindow):
 
     #Hàm nghe để kiểm tra phát âm
     def listenning(self):
+        if len(self.ui.lstVoice) >=3 or self.ui.lstPractice[0][1] in self.ui.lstVoice :   # Nếu phát âm 3 lần thì ko cho phát âm nữa
+            return 
+
         robot_ear =speech_recognition.Recognizer()
         with speech_recognition.Microphone() as mic:
             print("Robot: I'm Listening")
@@ -196,10 +201,12 @@ class UIFunctions(MainWindow):
             
         try:
             self.ui.voice = robot_ear.recognize_google(audio)
-            #self.txtVoice.setText(self.voice)
+            print(self.ui.voice)
         except:
-            self.voice ="..."
-            #self.txtVoice.setText("...")
+            self.ui.voice ="..."
+        self.ui.lstVoice.append(self.ui.voice)
+        print(self.ui.lstVoice)
+    
     # Đọc từ vựng ở trong ô text
     def speaking(self):
         voca = self.ui.txtVocabulary.toPlainText()
