@@ -14,7 +14,6 @@ import speech_recognition
 import pyttsx3
 from spellchecker import SpellChecker
 spell = SpellChecker()
-EPS = 10e-6
 def showdialog(mess):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)

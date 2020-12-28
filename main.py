@@ -14,11 +14,13 @@ from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFo
 from PySide2.QtWidgets import *
 # GUI FILE
 from ui_main import Ui_MainWindow
-
 # IMPORT FUNCTIONS
 from ui_functions import *
 
 from random import shuffle
+from frmStart import *
+
+
 
 class MainWindow(QMainWindow):
     # List lưu trữ 5 từ vựng mỗi Box
@@ -156,5 +158,9 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
     window = MainWindow()
     sys.exit(app.exec_())
