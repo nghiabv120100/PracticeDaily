@@ -1,4 +1,5 @@
 PySide2
+mysql-connector-python-rf
 SpeechRecognition
 pyttsx3
 mysql-connector-python
