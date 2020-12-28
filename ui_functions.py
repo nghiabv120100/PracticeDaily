@@ -184,21 +184,16 @@ class UIFunctions(MainWindow):
             #self.txtVoice.setText("...")
     # Đọc từ vựng ở trong ô text
     def speaking(self):
-        vocabulary = self.ui.txtVocabulary.toPlainText()
-        lstvoca = vocabulary.split(' ')
-        flag = True
-        for voca in lstvoca:
-            if spell.word_probability(voca) ==0:  # Xác xuất từ voca là một từ đúng
-                flag = False
-        if flag:
-                robot_mouth = pyttsx3.init()
-                robot_mouth.say(vocabulary)
-                robot_mouth.runAndWait()
+        voca = self.ui.txtVocabulary.toPlainText()
+        if(spell.correction(voca)==voca):
+            robot_mouth = pyttsx3.init()
+            robot_mouth.say(voca)
+            robot_mouth.runAndWait()
         else:
             robot_mouth = pyttsx3.init()
             robot_mouth.say("You are wrong")
             robot_mouth.runAndWait()
-    
+        
     #Xem lại những từ đã trả lời đúng và đã trả lời sai
     def reviewVocabulary(self):
         if self.ui.level >0:
