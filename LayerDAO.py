@@ -164,5 +164,21 @@ def totalResult():
     sql = "select * from review"
     cur.execute(sql)
     myresult = cur.fetchall()
-    print(myresult)
-totalResult()
+    lst = []
+    for x in myresult:
+        if not x[2] in lst:
+            lst.append(x[2])
+    lstTrue = []
+    lstFalse = []
+    for x in lst:
+        countTrue = 0
+        countFalse = 0
+        for y in myresult:
+            if y[2] == x:
+                if y[1] == 1:
+                    countTrue +=1
+                else:
+                    countFalse +=1
+        lstTrue.append((countTrue,x))
+        lstFalse.append((countFalse,x))
+    return lstTrue,lstFalse

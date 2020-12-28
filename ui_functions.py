@@ -16,6 +16,8 @@ from spellchecker import SpellChecker
 import PySide2
 import tkinter as tk
 from tkinter import messagebox
+import matplotlib.pyplot as plt
+
 spell = SpellChecker()
 root= tk.Tk()
 
@@ -265,3 +267,14 @@ class UIFunctions(MainWindow):
     def renameBox(self,level):
         numOfBox= countNumOfBox(level)
         exec('self.ui.btn_page_'+str(level+1)+'.setText("Box"+str(level)+" ("+str(numOfBox)+")")')
+def drawGraph():
+    d1,d2 = totalResult()
+    Day = [x[1] for x in d1]
+    trues = [x[0] for x in d1]
+    falses = [x[0] for x in d2]
+    plt.plot(Day,trues)
+    plt.title('Review total result')
+    plt.xlabel('Date')
+    plt.ylabel('Correct')
+    plt.show()
+

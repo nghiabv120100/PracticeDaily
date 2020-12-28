@@ -7,3 +7,4 @@ pipwin
 pyaudio
 pyspellchecker
 PyQt5
+matplotlib
