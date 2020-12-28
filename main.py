@@ -18,7 +18,7 @@ from ui_main import Ui_MainWindow
 from ui_functions import *
 
 from random import shuffle
-from frmStart import *
+# from frmStart import *
 
 
 
@@ -158,9 +158,9 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
+    # Form = QtWidgets.QWidget()
+    # ui = Ui_Form()
+    # ui.setupUi(Form)
+    # Form.show()
     window = MainWindow()
     sys.exit(app.exec_())
