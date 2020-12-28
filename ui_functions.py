@@ -14,8 +14,10 @@ import speech_recognition
 import pyttsx3
 from spellchecker import SpellChecker
 import PySide2
+import tkinter as tk
+from tkinter import messagebox
 spell = SpellChecker()
-
+root= tk.Tk()
 
 
 def showdialog(mess):
@@ -32,16 +34,9 @@ def showdialog(mess):
 class UIFunctions(MainWindow):
     #Hiển thị thông báo
     def message_box(self):
-
-        msg = QMessageBox()
-        # # msg.setText("Message has been sended")
-        # # msg.setWindowTitle("SENT")
-        msg.setStyleSheet("background: rgb(0, 0, 255);")
-        msg.setStyleSheet("color: rgb(255, 255, 255);")
-
-        resp = msg.question(self,'Notification', 'Do you want to quit?', QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-        
-        if resp == PySide2.QtWidgets.QMessageBox.StandardButton.Yes:
+        root.withdraw()
+        resp = tk.messagebox.askquestion ('Warning','Do you want to quit?',icon = 'warning')
+        if resp:
             self.close()
         else:
             pass
@@ -238,9 +233,9 @@ class UIFunctions(MainWindow):
                 self.ui.tlwBoxWord.setItem(i,1,QTableWidgetItem(row[5]))
                 self.ui.tlwBoxWord.setItem(i,2,QTableWidgetItem(row[2]))
                 #Tô màu
-                self.ui.tlwBoxWord.item(i,0).setBackground(QtGui.QColor(0,255,0))
-                self.ui.tlwBoxWord.item(i,1).setBackground(QtGui.QColor(0,255,0))
-                self.ui.tlwBoxWord.item(i,2).setBackground(QtGui.QColor(0,255,0))
+                self.ui.tlwBoxWord.item(i,0).setBackground(QColor(0,255,0))
+                self.ui.tlwBoxWord.item(i,1).setBackground(QColor(0,255,0))
+                self.ui.tlwBoxWord.item(i,2).setBackground(QColor(0,255,0))
                 i=i+1
             for row in lstWrong:
                 self.ui.tlwBoxWord.setRowCount(i+1)
@@ -248,9 +243,9 @@ class UIFunctions(MainWindow):
                 self.ui.tlwBoxWord.setItem(i,1,QTableWidgetItem(row[5]))
                 self.ui.tlwBoxWord.setItem(i,2,QTableWidgetItem(row[2]))
                 #Tô màu
-                self.ui.tlwBoxWord.item(i,0).setBackground(QtGui.QColor(255,0,0))
-                self.ui.tlwBoxWord.item(i,1).setBackground(QtGui.QColor(255,0,0))
-                self.ui.tlwBoxWord.item(i,2).setBackground(QtGui.QColor(255,0,0))
+                self.ui.tlwBoxWord.item(i,0).setBackground(QColor(255,0,0))
+                self.ui.tlwBoxWord.item(i,1).setBackground(QColor(255,0,0))
+                self.ui.tlwBoxWord.item(i,2).setBackground(QColor(255,0,0))
                 i=i+1
         elif self.ui.level <=0:
         # Đổi tên Review thành Move
