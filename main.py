@@ -16,7 +16,6 @@ from PySide2.QtWidgets import *
 from ui_main import Ui_MainWindow
 # IMPORT FUNCTIONS
 from ui_functions import *
-import threading
 from random import shuffle
 # from frmStart import *
 from PyQt5 import QtCore, QtGui, QtWidgets

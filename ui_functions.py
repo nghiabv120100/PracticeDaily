@@ -226,9 +226,9 @@ class UIFunctions(MainWindow):
                 self.ui.tlwBoxWord.setItem(i,1,QTableWidgetItem(row[5]))
                 self.ui.tlwBoxWord.setItem(i,2,QTableWidgetItem(row[2]))
                 #Tô màu
-                self.ui.tlwBoxWord.item(i,0).setBackground(QtGui.QColor(0,255,0))
-                self.ui.tlwBoxWord.item(i,1).setBackground(QtGui.QColor(0,255,0))
-                self.ui.tlwBoxWord.item(i,2).setBackground(QtGui.QColor(0,255,0))
+                self.ui.tlwBoxWord.item(i,0).setBackground(QColor(0,255,0))
+                self.ui.tlwBoxWord.item(i,1).setBackground(QColor(0,255,0))
+                self.ui.tlwBoxWord.item(i,2).setBackground(QColor(0,255,0))
                 i=i+1
             for row in lstWrong:
                 self.ui.tlwBoxWord.setRowCount(i+1)
@@ -236,9 +236,9 @@ class UIFunctions(MainWindow):
                 self.ui.tlwBoxWord.setItem(i,1,QTableWidgetItem(row[5]))
                 self.ui.tlwBoxWord.setItem(i,2,QTableWidgetItem(row[2]))
                 #Tô màu
-                self.ui.tlwBoxWord.item(i,0).setBackground(QtGui.QColor(255,0,0))
-                self.ui.tlwBoxWord.item(i,1).setBackground(QtGui.QColor(255,0,0))
-                self.ui.tlwBoxWord.item(i,2).setBackground(QtGui.QColor(255,0,0))
+                self.ui.tlwBoxWord.item(i,0).setBackground(QColor(255,0,0))
+                self.ui.tlwBoxWord.item(i,1).setBackground(QColor(255,0,0))
+                self.ui.tlwBoxWord.item(i,2).setBackground(QColor(255,0,0))
                 i=i+1
         elif self.ui.level <=0:
         # Đổi tên Review thành Move
