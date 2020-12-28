@@ -5,3 +5,5 @@ pyttsx3
 mysql-connector-python
 pipwin
 pyaudio
+pyspellchecker
+PyQt5
