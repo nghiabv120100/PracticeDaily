@@ -237,36 +237,11 @@ class UIFunctions(MainWindow):
             if move(word[0])==1:
                 showdialog("Move Success")
                 UIFunctions.mapping(self,self.ui.level)
+                UIFunctions.renameBox(self,1)
             else:
                 showdialog("Move Fail")  
 
         
-    # #Ẩn thanh top
-    # def changedTopBar(self):
-    #     #Nếu đang ở form source thì ẩn hết 
-    #     if self.ui.level==0:
-    #         self.ui.btn_edit.hide()
-    #         self.ui.btn_delete.hide()
-    #         self.ui.btn_review.hide()
-    #         self.ui.btn_practice.hide()
-    #         self.ui.btn_cancel.hide()
-    #     elif self.ui.level >0:
-    #         #Tạo button Edit
-    #         self.ui.btn_edit = QPushButton(self.ui.frame_toggle)
-    #         self.ui.btn_edit.setObjectName(u"btn_edit")
-    #         self.ui.btn_edit.setMinimumSize(QSize(0, 40))
-    #         self.ui.btn_edit.setStyleSheet(u"QPushButton {\n"
-    # "	color: rgb(255, 255, 255);\n"
-    # "	background-color: rgb(35, 35, 35);\n"
-    # "	border: 0px solid;\n"
-    # "}\n"
-    # "QPushButton:hover {\n"
-    # "	background-color: rgb(85, 170, 255);\n"
-    # "}")
-
-    #         self.ui.horizontalLayout.addWidget(self.ui.btn_edit)
-    #         self.ui.btn_edit.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
-
-    # def hideButton(self):
-    #     self.ui.btnCustom.hide()
-          
+    def renameBox(self,level):
+        numOfBox= countNumOfBox(level)
+        exec('self.ui.btn_page_'+str(level+1)+'.setText("Box"+str(level)+" ("+str(numOfBox)+")")')

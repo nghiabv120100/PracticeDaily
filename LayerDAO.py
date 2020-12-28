@@ -9,8 +9,8 @@ from _datetime import date
 #     return myconn
 def getConnection():
     # tạo đối tượng connection
-    myconn = mysql.connector.connect(host = "127.0.0.1", user = "jstD",
-        password = "Dung_2000", database = "NNLTTT")
+    myconn = mysql.connector.connect(host = "127.0.0.1", user = "root",
+        password = "123456", database = "NNLTTT")
     return myconn
                                                                
 def findAll(sql):
@@ -148,3 +148,13 @@ def updateBox(Date_Old):
         return 1
     except:
         return 0 
+
+#Đếm số từ vựng ở trong mỗi box
+def countNumOfBox(level):
+    myconn=getConnection()
+    cur = myconn.cursor()
+    sql = "select count(*) from word where level_box=%s "
+    par =(level,)
+    cur.execute(sql,par)
+    myresult = cur.fetchone()
+    return myresult[0]

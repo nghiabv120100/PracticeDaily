@@ -149,7 +149,9 @@ class MainWindow(QMainWindow):
         #self.ui.Btn_Toggle.clicked.connect(lambda:UIFunctions.hideButton(self))
         #self.ui.btn_page_3.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_3))
 
-
+        # Đổi tên Box theo số từ còn lại ở trong Box
+        for i in range(1,6):
+            UIFunctions.renameBox(self,i)
         ## SHOW ==> MAIN WINDOW
         ########################################################################
         
