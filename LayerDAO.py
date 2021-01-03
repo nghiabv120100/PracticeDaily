@@ -99,7 +99,6 @@ def findMaxDate():
 def addReview(id):
     myconn=getConnection()
     cur = myconn.cursor()
-    print("Nghiazzz")
     sql="Insert into review(id_Word) values(%s)"
     par =(id,)
     try:
@@ -141,7 +140,7 @@ def updateBox(Date_Old):
     cur = myconn.cursor()
     sql="update word set level_box=level_box+1 where id in (select id_word from review where date_practice=%s and status=1)"
 
-    par =(Date_Old)
+    par =(Date_Old,)
     try:
         cur.execute(sql,par)
         myconn.commit()
@@ -159,13 +158,16 @@ def countNumOfBox(level):
     myresult = cur.fetchone()
     return myresult[0]
 
-def totalResult():
+def totalResult(dateFrom,dateTo):
     myconn=getConnection()
     cur = myconn.cursor()
-    sql = "select * from review"
-    cur.execute(sql)
+    print(dateFrom.toString("yyyy-MM-dd"))
+    print(dateTo.toString("yyyy-MM-dd"))
+    sql = "select * from review where date_practice >=%s and date_practice <=%s  "
+    par =(dateFrom.toString("yyyy-MM-dd"),dateTo.toString("yyyy-MM-dd"))
+    cur.execute(sql,par)
     myresult = cur.fetchall()
-    lst = []
+    lst = []        # Lưu những ngày luyện tập ở đây
     for x in myresult:
         if not x[2] in lst:
             lst.append(x[2])
@@ -179,7 +181,7 @@ def totalResult():
             if y[2] == x:
                 if y[1] == 1:
                     countTrue +=1
-                else:
+                elif y[1] == 0:
                     countFalse +=1
         lstTrue.append((countTrue,x))
         lstFalse.append((countFalse,x))

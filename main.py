@@ -162,10 +162,17 @@ class MainWindow(QMainWindow):
         self.ui.btnSpeak.clicked.connect(lambda: UIFunctions.speaking(self))
 
         #Quit để thoát ứng dụng
+        
         self.ui.btnQuit.clicked.connect( lambda:UIFunctions.message_box(self))
 
-        #self.ui.Btn_Toggle.clicked.connect(lambda:UIFunctions.hideButton(self))
-        #self.ui.btn_page_3.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_3))
+        #Result để xem biểu đồ thống kê kết quả học tập
+        self.ui.btnResult.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_3))
+
+        # self.ui.btnResult.clicked.connect( lambda:drawGraph())
+        # Xem thống kê tình hình học tập từ ngày A đến ngày B
+        self.ui.btnShowResultByDay.clicked.connect(lambda: drawGraph(self.ui.dateFrom.date(),self.ui.dateTo.date()))
+        # Xem thống kê tình hình học tập trong tháng
+        self.ui.btnShowResultByMonth.clicked.connect(lambda: drawGraph(QDate(self.ui.dateMonth.date().year(),self.ui.dateMonth.date().month(),numberOfDays(self.ui.dateMonth.date().year(),self.ui.dateMonth.date().month())),self.ui.dateMonth.date()))
 
         # Đổi tên Box theo số từ còn lại ở trong Box
         for i in range(1,6):
@@ -277,4 +284,4 @@ if __name__ == "__main__":
         else:
                 MainWindow()
         sys.exit(app.exec_())   
-        # drawGraph()             
+         

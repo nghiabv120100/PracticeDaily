@@ -293,7 +293,23 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.addWidget(self.btn_page_7)
         
 
+        #Tạo button Result (Thống kê kết quả)
 
+        self.btnResult = QPushButton(self.frame_top_menus)
+        self.btnResult.setObjectName(u"btnResult")
+        self.btnResult.setMinimumSize(QSize(0, 40))
+        self.btnResult.setStyleSheet(u"QPushButton {\n"
+"	color: rgb(255, 255, 255);\n"
+"	background-color: rgb(35, 35, 35);\n"
+"	border: 0px solid;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(85, 170, 255);\n"
+"}")
+
+        self.verticalLayout_4.addWidget(self.btnResult)
+
+        #############################################
 
         self.verticalLayout_3.addWidget(self.frame_top_menus, 0, Qt.AlignTop)
 
@@ -498,7 +514,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(self.page_1)
         QtCore.QMetaObject.connectSlotsByName(self.page_1)
-
+        # setupUi
         self.btnCustom.setText(QCoreApplication.translate("Form", "Custom"))
         self.btnRecruitment.setText(QCoreApplication.translate("Form", "Recruitment"))
         self.btnWorkplace.setText(QCoreApplication.translate("Form", "Workplace"))
@@ -507,6 +523,95 @@ class Ui_MainWindow(object):
         self.btnBussiness.setText(QCoreApplication.translate("Form", "Bussiness"))
 
         # setupUi
+
+        #Tạo form thống kê kết quả
+        self.frame = QtWidgets.QFrame(self.page_3)
+        self.frame.setGeometry(QtCore.QRect(110, 50, 701, 411))
+        self.frame.setStyleSheet("background:rgb(45,45,45) ")
+        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.dateTo = QtWidgets.QDateEdit(self.frame)
+        self.dateTo.setGeometry(QtCore.QRect(170, 210, 141, 31))
+        self.dateTo.setDateTime(QtCore.QDateTime(QtCore.QDate(2021, 1, 1), QtCore.QTime(0, 0, 0)))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.dateTo.setFont(font)
+        self.dateTo.setStyleSheet("color: rgb(255, 255, 255)")
+        self.dateTo.setObjectName("dateTo")
+        self.btnShowResultByDay = QtWidgets.QPushButton(self.frame)
+        self.btnShowResultByDay.setGeometry(QtCore.QRect(170, 270, 141, 41))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.btnShowResultByDay.setFont(font)
+        self.btnShowResultByDay.setStyleSheet("color: rgb(255, 255, 255);\n"
+"background: rgb(167, 167, 167)")
+        self.btnShowResultByDay.setObjectName("btnShowResultByDay")
+        self.label = QtWidgets.QLabel(self.frame)
+        self.label.setGeometry(QtCore.QRect(80, 180, 55, 16))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label.setFont(font)
+        self.label.setStyleSheet("color: rgb(255, 255, 255)")
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(self.frame)
+        self.label_2.setGeometry(QtCore.QRect(80, 220, 55, 16))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_2.setFont(font)
+        self.label_2.setStyleSheet("color: rgb(255, 255, 255)")
+        self.label_2.setObjectName("label_2")
+        self.dateFrom = QtWidgets.QDateEdit(self.frame)
+        self.dateFrom.setGeometry(QtCore.QRect(170, 170, 141, 31))
+        self.dateFrom.setDateTime(QtCore.QDateTime(QtCore.QDate(2020, 1, 1), QtCore.QTime(0, 0, 0)))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.dateFrom.setFont(font)
+        self.dateFrom.setStyleSheet("color: rgb(255, 255, 255)")
+        self.dateFrom.setObjectName("dateFrom")
+        self.dateMonth = QtWidgets.QDateEdit(self.frame)
+        self.dateMonth.setGeometry(QtCore.QRect(480, 210, 141, 31))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.dateMonth.setFont(font)
+        self.dateMonth.setStyleSheet("color: rgb(255, 255, 255)")
+        self.dateMonth.setObjectName("dateMonth")
+        self.label_3 = QtWidgets.QLabel(self.frame)
+        self.label_3.setGeometry(QtCore.QRect(390, 220, 71, 16))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_3.setFont(font)
+        self.label_3.setStyleSheet("color: rgb(255, 255, 255)")
+        self.label_3.setObjectName("label_3")
+        self.btnShowResultByMonth = QtWidgets.QPushButton(self.frame)
+        self.btnShowResultByMonth.setGeometry(QtCore.QRect(480, 270, 141, 41))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.btnShowResultByMonth.setFont(font)
+        self.btnShowResultByMonth.setStyleSheet("color: rgb(255, 255, 255);\n"
+"background: rgb(167, 167, 167)")
+        self.btnShowResultByMonth.setObjectName("btnShowResultByMonth")
+        self.label_4 = QtWidgets.QLabel(self.frame)
+        self.label_4.setGeometry(QtCore.QRect(230, 50, 271, 41))
+        font = QtGui.QFont()
+        font.setPointSize(16)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_4.setFont(font)
+        self.label_4.setStyleSheet("color: rgb(0, 0, 127)")
+        self.label_4.setObjectName("label_4")
+
+        self.retranslateUi(self.page_3)
+        QtCore.QMetaObject.connectSlotsByName(self.page_3)
+
+         # setupUi
+        self.btnShowResultByDay.setText(QCoreApplication.translate("Form", "Show Result"))
+        self.label.setText(QCoreApplication.translate("Form", "From:"))
+        self.label_2.setText(QCoreApplication.translate("Form", "To:"))
+        self.dateMonth.setDisplayFormat(QCoreApplication.translate("Form", "M/yyyy"))
+        self.label_3.setText(QCoreApplication.translate("Form", "Month:"))
+        self.btnShowResultByMonth.setText(QCoreApplication.translate("Form", "Show Result"))
+        self.label_4.setText(QCoreApplication.translate("Form", "Thống kê kết quả."))
 
     def createTable(self,MainWindow):
          #################################################################
@@ -521,7 +626,7 @@ class Ui_MainWindow(object):
         self.tlwBoxWord.setRowCount(1)
         self.tlwBoxWord.setItem(0,0, QTableWidgetItem("Vocabulary")) 
         self.tlwBoxWord.setItem(0,1, QTableWidgetItem("Part Of Speech"))
-        self.tlwBoxWord.setItem(0,2, QTableWidgetItem("Means"))
+        self.tlwBoxWord.setItem(0,2, QTableWidgetItem("Meaning"))
         self.tlwBoxWord.horizontalHeader().setVisible(False)
         self.tlwBoxWord.verticalHeader().setVisible(False)
 
@@ -545,7 +650,8 @@ class Ui_MainWindow(object):
         self.btn_delete.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
         self.btn_practice.setText(QCoreApplication.translate("MainWindow", u"Practice", None))
         self.btn_review.setText(QCoreApplication.translate("MainWindow", u"Review", None))
-        self.btnQuit.setText(QCoreApplication.translate("MainWindow", u"Cancel", None))
+        self.btnQuit.setText(QCoreApplication.translate("MainWindow", u"Quit", None))
+        self.btnResult.setText(QCoreApplication.translate("MainWindow", u"Result", None))
         # self.label_1.setText(QCoreApplication.translate("MainWindow", u"PAGE 1", None))
         # self.label_2.setText(QCoreApplication.translate("MainWindow", u"PAGE 2", None))
         #self.label.setText(QCoreApplication.translate("MainWindow", u"PAGE 3", None))

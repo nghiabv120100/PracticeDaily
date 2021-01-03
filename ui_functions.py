@@ -267,8 +267,8 @@ class UIFunctions(MainWindow):
     def renameBox(self,level):
         numOfBox= countNumOfBox(level)
         exec('self.ui.btn_page_'+str(level+1)+'.setText("Box"+str(level)+" ("+str(numOfBox)+")")')
-def drawGraph():
-    d1,d2 = totalResult()
+def drawGraph(dateFrom,dateTo):
+    d1,d2 = totalResult(dateFrom,dateTo)
     Day = [x[1] for x in d1]
     Day = [str(x.day)+'-'+str(x.month) for x in Day]
     print(Day)
@@ -284,4 +284,19 @@ def drawGraph():
     plt.ylabel('Number Answers')
     plt.legend()
     plt.show()
+
+def numberOfDays(y, m):
+      leap = 0
+      if y% 400 == 0:
+         leap = 1
+      elif y % 100 == 0:
+         leap = 0
+      elif y% 4 == 0:
+         leap = 1
+      if m==2:
+         return 28 + leap
+      list = [1,3,5,7,8,10,12]
+      if m in list:
+         return 31
+      return 30
 
