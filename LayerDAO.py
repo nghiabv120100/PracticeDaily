@@ -99,6 +99,7 @@ def findMaxDate():
 def addReview(id):
     myconn=getConnection()
     cur = myconn.cursor()
+    print("Nghiazzz")
     sql="Insert into review(id_Word) values(%s)"
     par =(id,)
     try:
@@ -170,6 +171,7 @@ def totalResult():
             lst.append(x[2])
     lstTrue = []
     lstFalse = []
+    lst.sort()
     for x in lst:
         countTrue = 0
         countFalse = 0

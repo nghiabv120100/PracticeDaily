@@ -23,3 +23,8 @@ class Review:
         self.id_word = id_word
         self.status =status
         self.next = None
+class Cons:
+    
+    def __init__(self): 
+        self.numwords = 0 
+         

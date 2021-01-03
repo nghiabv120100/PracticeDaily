@@ -20,7 +20,8 @@ from random import shuffle
 # from frmStart import *
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-numwords = 0
+numwords=0
+
 class MainWindow(QMainWindow):
     # List lưu trữ 5 từ vựng mỗi Box
     lstPracticeBox1=[]
@@ -30,9 +31,11 @@ class MainWindow(QMainWindow):
     lstPracticeBox5=[]
     
     def loadVocabulary(self):
+        global numwords
         Date_Now = date.today()
         Date_Old = findMaxDate()
-        length=0
+        length=numwords
+        print("Num",numwords)
         print(Date_Now)
         print(Date_Old)
         if Date_Now > Date_Old:  
@@ -42,7 +45,7 @@ class MainWindow(QMainWindow):
             updateBox(Date_Old)
             lstBox1 = find_by_level_box(1)
             print(lstBox1)
-            print("nghia")
+          
             shuffle(lstBox1)
             if len(lstBox1) > 30: 
                 length=numwords+len(lstBox1)//10
@@ -50,29 +53,30 @@ class MainWindow(QMainWindow):
             ############################
             lstBox2 = find_by_level_box(2)
             shuffle(lstBox2)
-            if len(lstBox1) > 30: 
+            if len(lstBox2) > 30: 
                 length=numwords+len(lstBox1)//10           
             lstPracticeBox2=lstBox2[0:length]
             #############################
             lstBox3 = find_by_level_box(3)
             shuffle(lstBox3)
-            if len(lstBox1) > 30: 
+            if len(lstBox3) > 30: 
                 length=numwords+len(lstBox1)//10
             lstPracticeBox3=lstBox3[0:length]
             #############################
             lstBox4 = find_by_level_box(4)
             shuffle(lstBox4)
-            if len(lstBox1) > 30: 
+            if len(lstBox4) > 30: 
                 length=numwords+len(lstBox1)//10
             lstPracticeBox4=lstBox4[0:length]
             #############################
             lstBox5 = find_by_level_box(5)
             shuffle(lstBox5)
-            if len(lstBox1) > 30: 
+            if len(lstBox5) > 30: 
                 length=numwords+len(lstBox1)//10
             lstPracticeBox5=lstBox5[0:length]
             #############################
             #insert vào mỗi Box 5 từ 
+            print("nghiahsg")
             for item in lstPracticeBox1:
                 addReview(item[0])
             for item in lstPracticeBox2:
@@ -89,7 +93,6 @@ class MainWindow(QMainWindow):
         QMainWindow.__init__(self)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
         self.loadVocabulary()
         ## TOGGLE/BURGUER MENU
         ########################################################################
@@ -174,18 +177,22 @@ class MainWindow(QMainWindow):
         ## ==> END ##
 class Ui_Form(object):
         def setupUi(self, Form):
+            
                 def easyLevel():
                         print(1)
+                        global numwords
                         numwords = 3
                         Form.setHidden(True)
                         MainWindow()
                 def mediumLevel():
+                        global numwords
                         print(2)
                         numwords = 5
                         Form.setHidden(True)
                         MainWindow()
                 def hardLevel():
                         print(3)
+                        global numwords
                         numwords = 10
                         Form.setHidden(True)
                         MainWindow()
@@ -256,18 +263,18 @@ class Ui_Form(object):
                 self.label.setText(_translate("Form", "Vui lòng chọn độ khó để tiếp tục."))
 
 if __name__ == "__main__":
-        # Date_Now = date.today()
-        # Date_Old = findMaxDate()
-        # app = QApplication(sys.argv)
+        Date_Now = date.today()
+        Date_Old = findMaxDate()
+        app = QApplication(sys.argv)
 
-        # print(Date_Now)
-        # print(Date_Old)
-        # if Date_Now > Date_Old:
-        #         Form = QtWidgets.QWidget()
-        #         ui = Ui_Form()
-        #         ui.setupUi(Form)
-        #         Form.show()
-        # else:
-        #         MainWindow()
-        # sys.exit(app.exec_())   
-        drawGraph()             
+        print(Date_Now)
+        print(Date_Old)
+        if Date_Now > Date_Old:
+                Form = QtWidgets.QWidget()
+                ui = Ui_Form()
+                ui.setupUi(Form)
+                Form.show()
+        else:
+                MainWindow()
+        sys.exit(app.exec_())   
+        # drawGraph()             

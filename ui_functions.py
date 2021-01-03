@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt
 
 spell = SpellChecker()
 root= tk.Tk()
-
+root.withdraw()
 
 def showdialog(mess):
         msg = QMessageBox()
@@ -270,11 +270,18 @@ class UIFunctions(MainWindow):
 def drawGraph():
     d1,d2 = totalResult()
     Day = [x[1] for x in d1]
+    Day = [str(x.day)+'-'+str(x.month) for x in Day]
+    print(Day)
     trues = [x[0] for x in d1]
+    print(trues)
     falses = [x[0] for x in d2]
-    plt.plot(Day,trues)
+    print(falses)
+    plt.plot(Day,trues,label = 'Correct')
+    plt.plot(Day,falses,label = 'Wrong')
+
     plt.title('Review total result')
     plt.xlabel('Date')
-    plt.ylabel('Correct')
+    plt.ylabel('Number Answers')
+    plt.legend()
     plt.show()
 
