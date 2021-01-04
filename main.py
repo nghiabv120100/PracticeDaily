@@ -144,7 +144,7 @@ class MainWindow(QMainWindow):
         self.ui.btnTravel.clicked.connect(lambda:UIFunctions.mapping(self,-5))
 
         #Edit
-        self.ui.btn_edit.clicked.connect(lambda:UIFunctions.edit_Vocabulary(self.ui))
+        self.ui.btn_edit.clicked.connect(lambda:UIFunctions.edit_Vocabulary(self))
         #Delete
         self.ui.btn_delete.clicked.connect(lambda:UIFunctions.delete_Vocabulary(self))
         #Practice
@@ -176,7 +176,10 @@ class MainWindow(QMainWindow):
         self.ui.btnShowResultByMonth.clicked.connect(lambda: drawGraph(QDate(self.ui.dateMonth.date().year(),self.ui.dateMonth.date().month(),numberOfDays(self.ui.dateMonth.date().year(),self.ui.dateMonth.date().month())),self.ui.dateMonth.date()))
         # Khi nhấn vào table vocabylary thì sẽ binding dữ liệu sang form
         self.ui.tlwBoxWord.clicked.connect(lambda:UIFunctions.displayDetailVocabulary(self))
-
+        # Khi nhấn vào button chọn hình ảnh
+        self.ui.btn_image.clicked.connect(lambda:UIFunctions.loadImage(self))
+        # Khi nhấn vào nút Cancel để huỷ thao tác Edit hoặc Add từ vựng
+        self.ui.btn_cancel.clicked.connect(lambda:UIFunctions.cancelEditOrAdd(self))
         # Đổi tên Box theo số từ còn lại ở trong Box
         for i in range(1,6):
             UIFunctions.renameBox(self,i)

@@ -15,12 +15,19 @@ import pyttsx3
 from spellchecker import SpellChecker
 import PySide2
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import filedialog, messagebox
+from PIL import ImageTk,Image
 import matplotlib.pyplot as plt
 
 spell = SpellChecker()
 root= tk.Tk()
 root.withdraw()
+
+# Biến trạng thái của edit
+# 1: Edit
+# 2: Save of Edit
+# 3: Save of Add
+actionEdit=0 
 
 def showdialog(mess):
         msg = QMessageBox()
@@ -42,6 +49,23 @@ class UIFunctions(MainWindow):
             self.close()
         else:
             pass
+
+    ## Upload image
+    saveName="000.jpg"
+    def openfn(self):
+        root.withdraw()
+        filename = filedialog.askopenfile()
+        return filename
+    def loadImage(self):
+        f = UIFunctions.openfn(UIFunctions)
+        if f == None:
+            return
+        temp = f.name.split('/')
+        UIFunctions.saveName = temp[-1]
+        img = Image.open(f.name)
+        img.save("image/"+UIFunctions.saveName)
+        self.ui.btn_image.setStyleSheet("border-image : url(image/"+UIFunctions.saveName+");") 
+
     def toggleMenu(self, maxWidth, enable):
         if enable:
 
@@ -65,7 +89,8 @@ class UIFunctions(MainWindow):
             self.animation.start()
 
     def mapping(self,level):
-        
+        global actionEdit
+        actionEdit=0
         self.ui.level=level
         self.ui.lstWord=find_by_level_box(level) 
         if self.ui.level <0:
@@ -92,9 +117,16 @@ class UIFunctions(MainWindow):
             i=i+1
     # Hiển thị chi tiết từ vựng qua frame frm_addVocabulary
     def displayDetailVocabulary(self):
+        global actionEdit
+        if actionEdit ==2 or actionEdit ==3 : # Đang edit hoặc đang Add
+            return 
+
         index=self.ui.tlwBoxWord.currentRow()-1
         if index < 0:
             return
+        
+        actionEdit=1        # Có thể edit
+
         word = self.ui.lstWord[index]
         self.ui.txt_vocabulary.setText(word[1])
         self.ui.txt_partofspeech.setText(word[5])
@@ -104,40 +136,70 @@ class UIFunctions(MainWindow):
 
     #Sửa từ vựng
     def edit_Vocabulary(self):
-        indexRow=self.tlwBoxWord.currentRow()-1
-        indexCol=self.tlwBoxWord.currentColumn()
-        if indexRow <0:  # Nếu chưa chọn hàng để thay đổi 
-            return
-        value = self.tlwBoxWord.currentItem().text()
-        word = Word()
-        word.id=self.lstWord[indexRow][0]
-        word.vocabulary=self.lstWord[indexRow][1]
-        word.means=self.lstWord[indexRow][2]
-        word.image=self.lstWord[indexRow][3]
-        word.level_box=self.lstWord[indexRow][4]
-        word.part_of_speech=self.lstWord[indexRow][5]
-        #Ghi đè giá trị đã sửa 
-        if indexCol == 0:
-            if word.vocabulary==value: # Nếu ko có sự thay đổi
-                return 
-            word.vocabulary=value
-        elif indexCol==1:
-            if word.part_of_speech==value:
-                return
-            word.part_of_speech=value
-        elif indexCol ==2:
-            if word.means == value:
-                return 
-            word.means = value
-        flag=update(word)
 
-        if flag==1:
-            showdialog("Update Success")
+        global actionEdit
+        if actionEdit ==0:
+            return
+        elif actionEdit ==1:
+            UIFunctions.enableTextEdit(self) 
+            actionEdit =2
+            self.ui.btn_edit.setText(QCoreApplication.translate("MainWindow", u"Save", None))
+        elif actionEdit == 2:
+            indexRow=self.ui.tlwBoxWord.currentRow()-1
+            if indexRow <0:  # Nếu chưa chọn hàng để thay đổi 
+                return
+            word = Word()
+            word.id=self.ui.lstWord[indexRow][0]
+            word.vocabulary=self.ui.txt_vocabulary.toPlainText()
+            word.means=self.ui.txt_meaning.toPlainText()
+            word.image=UIFunctions.saveName
+            word.level_box=self.ui.level
+            word.part_of_speech=self.ui.txt_partofspeech.toPlainText()
+            flag=update(word)
+            if flag==1:
+                showdialog("Update Success")
+                UIFunctions.mapping(self,self.ui.level)
+                UIFunctions.clearTextEdit(self)
+                UIFunctions.lockTextEdit(self)
+                self.ui.btn_edit.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
+            else:
+                showdialog("Update Fail")
+            actionEdit=0
+        elif actionEdit == 3: # Thêm từ vựng
+            word = Word()
+            word.vocabulary=self.ui.txt_vocabulary.toPlainText()
+            word.means=self.ui.txt_meaning.toPlainText()
+            word.image=UIFunctions.saveName
+            word.level_box=self.ui.level
+            word.part_of_speech=self.ui.txt_partofspeech.toPlainText()
+            flag=add(word)
+            if flag==1:
+                showdialog("Addition Success")
+                UIFunctions.mapping(self,self.ui.level)
+                UIFunctions.clearTextEdit(self)
+                UIFunctions.lockTextEdit(self)
+                self.ui.btn_edit.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
+            else:
+                showdialog("Addition Fail")
+            actionEdit=0
+
+    #Huỷ thêm hoặc sửa từ vựng
+    def cancelEditOrAdd(self):
+        global actionEdit
+        if actionEdit == 2 or actionEdit ==3 :
+            actionEdit=0
+            UIFunctions.clearTextEdit(self)
+            UIFunctions.lockTextEdit(self)
+            self.ui.btn_edit.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
         else:
-            showdialog("Update Fail")
+            pass
+
 
     # Hàm xoá từ vựng
     def delete_Vocabulary(self):
+        global actionEdit
+        if actionEdit !=1: # Khi nhấn vào cell của table thì action edit =1
+            return 
         index=self.ui.tlwBoxWord.currentRow()-1
         if index < 0:
             return
@@ -146,6 +208,7 @@ class UIFunctions(MainWindow):
         if delete(id)==1:
             showdialog("Delete Success")
             UIFunctions.mapping(self,self.ui.level)
+            UIFunctions.clearTextEdit(self)
         else:
             showdialog("Delete Fail")  
     
@@ -154,12 +217,12 @@ class UIFunctions(MainWindow):
         if self.ui.level >5 :
             return
         elif self.ui.level < 1: # Đổi practice thành Add
-            num = countNumOfBox(self.ui.level)
-            self.ui.tlwBoxWord.insertRow(1)
-            # self.ui.tlwBoxWord.setRowCount(num+2)
-            self.ui.tlwBoxWord.setFocus()
-            self.ui.tlwBoxWord.setCurrentCell(1,0)
-            print(num+2)
+            global actionEdit
+            actionEdit=3
+            self.ui.btn_edit.setText(QCoreApplication.translate("MainWindow", u"Save", None))
+            UIFunctions.enableTextEdit(self)
+            UIFunctions.clearTextEdit(self)
+
         else:
             self.ui.stackedWidget.setCurrentWidget(self.ui.frmPractice)
             self.ui.lstPractice=findPractice(-1,self.ui.level)
@@ -283,6 +346,9 @@ class UIFunctions(MainWindow):
         elif self.ui.level <0:
         # Đổi tên Review thành Move
         # Hàm di chuyển từ vựng vào hộp 1
+            global actionEdit
+            if actionEdit !=1: # Khi nhấn vào cell của table thì action edit =1
+                return 
             index=self.ui.tlwBoxWord.currentRow()-1
             if index < 0:   # Trường hợp chọn header
                 return
@@ -303,9 +369,31 @@ class UIFunctions(MainWindow):
     def assignLevel(self,level):
         self.ui.level=level
 
-    def printHello(self,x):
-        print(x)
+    #Mở khoá text edit
+    def enableTextEdit(self):
+        self.ui.txt_vocabulary.setReadOnly(False)
+        self.ui.txt_partofspeech.setReadOnly(False)
+        self.ui.txt_meaning.setReadOnly(False)
+        self.ui.txt_eg.setReadOnly(False)
+        self.ui.txt_vocabulary.setFocus()
+        # self.ui.btn_image.setEnabled(True)
 
+
+    #khoá text edit
+    def lockTextEdit(self):
+        self.ui.txt_vocabulary.setReadOnly(True)
+        self.ui.txt_partofspeech.setReadOnly(True)
+        self.ui.txt_meaning.setReadOnly(True)
+        self.ui.txt_eg.setReadOnly(True)
+        # self.ui.btn_image.setEnabled(False)
+
+    #clear text edit
+    def clearTextEdit(self):
+        self.ui.txt_vocabulary.setText("")
+        self.ui.txt_partofspeech.setText("")
+        self.ui.txt_meaning.setText("")
+        self.ui.txt_eg.setText("")
+       
 
 def drawGraph(dateFrom,dateTo):
     d1,d2 = totalResult(dateFrom,dateTo)

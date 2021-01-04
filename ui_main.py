@@ -117,6 +117,21 @@ class Ui_MainWindow(object):
 "}")
 
         self.horizontalLayout.addWidget(self.btn_practice)
+        #Tạo button Cancel để huỷ Edit và Add
+        self.btn_cancel = QPushButton(self.frame_toggle)
+        self.btn_cancel.setObjectName(u"btn_cancel")
+        self.btn_cancel.setMinimumSize(QSize(0, 40))
+        self.btn_cancel.setStyleSheet(u"QPushButton {\n"
+"	color: rgb(255, 255, 255);\n"
+"	background-color: rgb(35, 35, 35);\n"
+"	border: 0px solid;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(85, 170, 255);\n"
+"}")
+
+        self.horizontalLayout.addWidget(self.btn_cancel)
+
         #Tạo button review
         self.btn_review = QPushButton(self.frame_toggle)
         self.btn_review.setObjectName(u"btn_review")
@@ -662,6 +677,8 @@ class Ui_MainWindow(object):
 "border-color:white;\n"
 "color: rgb(255,255,255)")
         self.txt_vocabulary.setObjectName("txt_vocabulary")
+        #Khoá textedit
+        self.txt_vocabulary.setReadOnly(True)
         self.txt_partofspeech = QtWidgets.QTextEdit(self.frame_addVocabulary)
         self.txt_partofspeech.setGeometry(QtCore.QRect(130, 250, 211, 31))
         font = QtGui.QFont()
@@ -672,6 +689,8 @@ class Ui_MainWindow(object):
 "border-color:white;\n"
 "color: rgb(255,255,255)")
         self.txt_partofspeech.setObjectName("txt_partofspeech")
+        #Khoá textedit
+        self.txt_partofspeech.setReadOnly(True)
         self.txt_meaning = QtWidgets.QTextEdit(self.frame_addVocabulary)
         self.txt_meaning.setGeometry(QtCore.QRect(130, 300, 211, 31))
         font = QtGui.QFont()
@@ -682,6 +701,8 @@ class Ui_MainWindow(object):
 "border-color:white;\n"
 "color: rgb(255,255,255)")
         self.txt_meaning.setObjectName("txt_meaning")
+        #Khoá textedit
+        self.txt_meaning.setReadOnly(True)
         self.txt_eg = QtWidgets.QTextEdit(self.frame_addVocabulary)
         self.txt_eg.setGeometry(QtCore.QRect(50, 340, 291, 81))
         font = QtGui.QFont()
@@ -692,6 +713,8 @@ class Ui_MainWindow(object):
 "border-color:white;\n"
 "color: rgb(255,255,255)")
         self.txt_eg.setObjectName("txt_eg")
+        #Khoá textedit
+        self.txt_eg.setReadOnly(True)
         # setupUi       
         self.label.setText(QCoreApplication.translate("Form", "Vocabulary:"))
         self.label_2.setText(QCoreApplication.translate("Form", "P Of Speech: :"))
@@ -757,6 +780,7 @@ class Ui_MainWindow(object):
         self.btn_edit.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
         self.btn_delete.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
         self.btn_practice.setText(QCoreApplication.translate("MainWindow", u"Practice", None))
+        self.btn_cancel.setText(QCoreApplication.translate("MainWindow", u"Cancel", None))
         self.btn_review.setText(QCoreApplication.translate("MainWindow", u"Review", None))
         self.btnQuit.setText(QCoreApplication.translate("MainWindow", u"Quit", None))
         self.btnResult.setText(QCoreApplication.translate("MainWindow", u"Result", None))
