@@ -612,15 +612,123 @@ class Ui_MainWindow(object):
         self.label_3.setText(QCoreApplication.translate("Form", "Month:"))
         self.btnShowResultByMonth.setText(QCoreApplication.translate("Form", "Show Result"))
         self.label_4.setText(QCoreApplication.translate("Form", "Thống kê kết quả."))
+        
+        # Tạo form add
+        self.frame_addVocabulary = QtWidgets.QFrame(self.page_2)
+        self.frame_addVocabulary.setGeometry(QtCore.QRect(550, 0, 351, 441))
+        self.frame_addVocabulary.setStyleSheet("background: rgb(47,47,47)")
+        self.frame_addVocabulary.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_addVocabulary.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_addVocabulary.setObjectName("frame_addVocabulary")
+        self.label = QtWidgets.QLabel(self.frame_addVocabulary)
+        self.label.setGeometry(QtCore.QRect(10, 200, 111, 31))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label.setFont(font)
+        self.label.setStyleSheet("color: rgb(255,255,255)")
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(self.frame_addVocabulary)
+        self.label_2.setGeometry(QtCore.QRect(10, 250, 111, 31))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_2.setFont(font)
+        self.label_2.setStyleSheet("color: rgb(255,255,255)")
+        self.label_2.setObjectName("label_2")
+        self.label_3 = QtWidgets.QLabel(self.frame_addVocabulary)
+        self.label_3.setGeometry(QtCore.QRect(10, 300, 111, 31))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_3.setFont(font)
+        self.label_3.setStyleSheet("color: rgb(255,255,255)")
+        self.label_3.setObjectName("label_3")
+        self.label_4 = QtWidgets.QLabel(self.frame_addVocabulary)
+        self.label_4.setGeometry(QtCore.QRect(10, 360, 111, 31))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_4.setFont(font)
+        self.label_4.setStyleSheet("color: rgb(255,255,255)")
+        self.label_4.setObjectName("label_4")
+        self.btn_image = QtWidgets.QPushButton(self.frame_addVocabulary)
+        self.btn_image.setGeometry(QtCore.QRect(10, 10, 331, 181))
+        self.btn_image.setStyleSheet("background:rgb(95, 95, 95)")
+        self.btn_image.setObjectName("btn_image")
+        self.txt_vocabulary = QtWidgets.QTextEdit(self.frame_addVocabulary)
+        self.txt_vocabulary.setGeometry(QtCore.QRect(130, 200, 211, 31))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.txt_vocabulary.setFont(font)
+        self.txt_vocabulary.setStyleSheet("border-style: solid;\n"
+"border-width: 1px;\n"
+"border-color:white;\n"
+"color: rgb(255,255,255)")
+        self.txt_vocabulary.setObjectName("txt_vocabulary")
+        self.txt_partofspeech = QtWidgets.QTextEdit(self.frame_addVocabulary)
+        self.txt_partofspeech.setGeometry(QtCore.QRect(130, 250, 211, 31))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.txt_partofspeech.setFont(font)
+        self.txt_partofspeech.setStyleSheet("border-style: solid;\n"
+"border-width: 1px;\n"
+"border-color:white;\n"
+"color: rgb(255,255,255)")
+        self.txt_partofspeech.setObjectName("txt_partofspeech")
+        self.txt_meaning = QtWidgets.QTextEdit(self.frame_addVocabulary)
+        self.txt_meaning.setGeometry(QtCore.QRect(130, 300, 211, 31))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.txt_meaning.setFont(font)
+        self.txt_meaning.setStyleSheet("border-style: solid;\n"
+"border-width: 1px;\n"
+"border-color:white;\n"
+"color: rgb(255,255,255)")
+        self.txt_meaning.setObjectName("txt_meaning")
+        self.txt_eg = QtWidgets.QTextEdit(self.frame_addVocabulary)
+        self.txt_eg.setGeometry(QtCore.QRect(50, 340, 291, 81))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.txt_eg.setFont(font)
+        self.txt_eg.setStyleSheet("border-style: solid;\n"
+"border-width: 1px;\n"
+"border-color:white;\n"
+"color: rgb(255,255,255)")
+        self.txt_eg.setObjectName("txt_eg")
+        # setupUi       
+        self.label.setText(QCoreApplication.translate("Form", "Vocabulary:"))
+        self.label_2.setText(QCoreApplication.translate("Form", "P Of Speech: :"))
+        self.label_3.setText(QCoreApplication.translate("Form", "Meaning:"))
+        self.label_4.setText(QCoreApplication.translate("Form", "Eg: "))
+        self.btn_image.setText(QCoreApplication.translate("Form", "This is image"))
+        self.txt_vocabulary.setHtml(QCoreApplication.translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.txt_partofspeech.setHtml(QCoreApplication.translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.txt_meaning.setHtml(QCoreApplication.translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.txt_eg.setHtml(QCoreApplication.translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
 
     def createTable(self,MainWindow):
          #################################################################
         #QTableWidget
         self.tlwBoxWord = QtWidgets.QTableWidget(self.page_2)
-        self.tlwBoxWord.setGeometry(QtCore.QRect(0, 0, 500, 500))
+        self.tlwBoxWord.setGeometry(QtCore.QRect(0, 0, 500, 400))
         self.tlwBoxWord.setStyleSheet("Background-color:\"white\"")
         self.tlwBoxWord.setObjectName("tlwBoxWord")
-
+        
+        #Khoá double click
+        self.tlwBoxWord.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
         self.tlwBoxWord.setColumnCount(3)
         self.tlwBoxWord.setRowCount(1)

@@ -38,7 +38,7 @@ class UIFunctions(MainWindow):
     def message_box(self):
         root.withdraw()
         resp = tk.messagebox.askquestion ('Warning','Do you want to quit?',icon = 'warning')
-        if resp:
+        if resp=="yes":
             self.close()
         else:
             pass
@@ -68,10 +68,12 @@ class UIFunctions(MainWindow):
         
         self.ui.level=level
         self.ui.lstWord=find_by_level_box(level) 
-        if self.ui.level <=0:
+        if self.ui.level <0:
             self.ui.btn_review.setText(QCoreApplication.translate("MainWindow", u"Move", None))
+            self.ui.btn_practice.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         else:
-            self.ui.btn_review.setText(QCoreApplication.translate("MainWindow", u"Review", None))   
+            self.ui.btn_review.setText(QCoreApplication.translate("MainWindow", u"Review", None))  
+            self.ui.btn_practice.setText(QCoreApplication.translate("MainWindow", u"Practice", None)) 
                    
         if len(self.ui.lstWord)==0:
             self.ui.tlwBoxWord.setColumnCount(3)
@@ -88,6 +90,17 @@ class UIFunctions(MainWindow):
             self.ui.tlwBoxWord.setItem(i,1,QTableWidgetItem(row[5]))
             self.ui.tlwBoxWord.setItem(i,2,QTableWidgetItem(row[2]))
             i=i+1
+    # Hiển thị chi tiết từ vựng qua frame frm_addVocabulary
+    def displayDetailVocabulary(self):
+        index=self.ui.tlwBoxWord.currentRow()-1
+        if index < 0:
+            return
+        word = self.ui.lstWord[index]
+        self.ui.txt_vocabulary.setText(word[1])
+        self.ui.txt_partofspeech.setText(word[5])
+        self.ui.txt_meaning.setText(word[2])
+        self.ui.btn_image.setStyleSheet("border-image : url(image/"+word[3]+");") 
+
 
     #Sửa từ vựng
     def edit_Vocabulary(self):
@@ -138,11 +151,23 @@ class UIFunctions(MainWindow):
     
     #Lấy mỗi hộp 5 từ để luyên tập
     def findListPractice(self):
-        self.ui.lstPractice=findPractice(-1,self.ui.level)
-        UIFunctions.displayPractice(self)
+        if self.ui.level >5 :
+            return
+        elif self.ui.level < 1: # Đổi practice thành Add
+            num = countNumOfBox(self.ui.level)
+            self.ui.tlwBoxWord.insertRow(1)
+            # self.ui.tlwBoxWord.setRowCount(num+2)
+            self.ui.tlwBoxWord.setFocus()
+            self.ui.tlwBoxWord.setCurrentCell(1,0)
+            print(num+2)
+        else:
+            self.ui.stackedWidget.setCurrentWidget(self.ui.frmPractice)
+            self.ui.lstPractice=findPractice(-1,self.ui.level)
+            UIFunctions.displayPractice(self)
 
     #Hiển thị từ vựng lên form Practice
     def displayPractice(self):
+        print("display")
         # Làm mới Form
         self.ui.txtMeans.setText("")
         self.ui.lblPicture.setStyleSheet("border-image : url(image/000.jpg);") 
@@ -218,10 +243,16 @@ class UIFunctions(MainWindow):
         
     #Xem lại những từ đã trả lời đúng và đã trả lời sai
     def reviewVocabulary(self):
-        if self.ui.level >0:
+        if self.ui.level >=0:
             lstCorrect = findPractice(1,self.ui.level)
             lstWrong = findPractice(0,self.ui.level)
-    
+
+            if (self.ui.level==0):
+                self.ui.stackedWidget.setCurrentWidget(self.ui.page_2)
+                lstCorrect =findAllPractice(1)
+                print(lstCorrect)
+                lstWrong =findAllPractice(0)
+            print(lstCorrect)
             self.ui.tlwBoxWord.setColumnCount(3)
             self.ui.tlwBoxWord.setRowCount(1)
             self.ui.tlwBoxWord.setItem(0,0, QTableWidgetItem("Vocabulary")) 
@@ -249,7 +280,7 @@ class UIFunctions(MainWindow):
                 self.ui.tlwBoxWord.item(i,1).setBackground(QColor(255,0,0))
                 self.ui.tlwBoxWord.item(i,2).setBackground(QColor(255,0,0))
                 i=i+1
-        elif self.ui.level <=0:
+        elif self.ui.level <0:
         # Đổi tên Review thành Move
         # Hàm di chuyển từ vựng vào hộp 1
             index=self.ui.tlwBoxWord.currentRow()-1
@@ -267,6 +298,15 @@ class UIFunctions(MainWindow):
     def renameBox(self,level):
         numOfBox= countNumOfBox(level)
         exec('self.ui.btn_page_'+str(level+1)+'.setText("Box"+str(level)+" ("+str(numOfBox)+")")')
+
+    # gán level
+    def assignLevel(self,level):
+        self.ui.level=level
+
+    def printHello(self,x):
+        print(x)
+
+
 def drawGraph(dateFrom,dateTo):
     d1,d2 = totalResult(dateFrom,dateTo)
     Day = [x[1] for x in d1]

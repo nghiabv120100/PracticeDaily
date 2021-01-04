@@ -103,8 +103,9 @@ class MainWindow(QMainWindow):
         ########################################################################
 
         # PAGE 1
+        #Box Source
         self.ui.btn_page_1.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_1))
-
+        self.ui.btn_page_1.clicked.connect(lambda:UIFunctions.mapping(self,0))
         # Box 1
         self.ui.btn_page_2.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_2))
         self.ui.btn_page_2.clicked.connect(lambda:UIFunctions.mapping(self,1))
@@ -128,26 +129,26 @@ class MainWindow(QMainWindow):
         self.ui.btnCustom.clicked.connect(lambda:UIFunctions.mapping(self,0))
         # Box Recruitment
         self.ui.btnRecruitment.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_2))
-        self.ui.btnRecruitment.clicked.connect(lambda:UIFunctions.mapping(self,0))
+        self.ui.btnRecruitment.clicked.connect(lambda:UIFunctions.mapping(self,-1))
         # Box Workplace
         self.ui.btnWorkplace.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_2))
-        self.ui.btnWorkplace.clicked.connect(lambda:UIFunctions.mapping(self,0))
+        self.ui.btnWorkplace.clicked.connect(lambda:UIFunctions.mapping(self,-2))
         # Box Bussiness
         self.ui.btnBussiness.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_2))
-        self.ui.btnBussiness.clicked.connect(lambda:UIFunctions.mapping(self,0))
+        self.ui.btnBussiness.clicked.connect(lambda:UIFunctions.mapping(self,-3))
         # Box Shopping
         self.ui.btnShopping.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_2))
-        self.ui.btnShopping.clicked.connect(lambda:UIFunctions.mapping(self,0))
+        self.ui.btnShopping.clicked.connect(lambda:UIFunctions.mapping(self,-4))
         # Box Travel
         self.ui.btnTravel.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_2))
-        self.ui.btnTravel.clicked.connect(lambda:UIFunctions.mapping(self,0))
+        self.ui.btnTravel.clicked.connect(lambda:UIFunctions.mapping(self,-5))
 
         #Edit
         self.ui.btn_edit.clicked.connect(lambda:UIFunctions.edit_Vocabulary(self.ui))
         #Delete
         self.ui.btn_delete.clicked.connect(lambda:UIFunctions.delete_Vocabulary(self))
         #Practice
-        self.ui.btn_practice.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.frmPractice))
+        #self.ui.btn_practice.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.frmPractice))
         self.ui.btn_practice.clicked.connect(lambda: UIFunctions.findListPractice(self))
         #Submit
         self.ui.btnSubmit.clicked.connect(lambda: UIFunctions.isCorrect(self,self.ui.lstPractice[0][1]))
@@ -167,12 +168,14 @@ class MainWindow(QMainWindow):
 
         #Result để xem biểu đồ thống kê kết quả học tập
         self.ui.btnResult.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_3))
-
+        self.ui.btnResult.clicked.connect(lambda:UIFunctions.assignLevel(self,7))
         # self.ui.btnResult.clicked.connect( lambda:drawGraph())
         # Xem thống kê tình hình học tập từ ngày A đến ngày B
         self.ui.btnShowResultByDay.clicked.connect(lambda: drawGraph(self.ui.dateFrom.date(),self.ui.dateTo.date()))
         # Xem thống kê tình hình học tập trong tháng
         self.ui.btnShowResultByMonth.clicked.connect(lambda: drawGraph(QDate(self.ui.dateMonth.date().year(),self.ui.dateMonth.date().month(),numberOfDays(self.ui.dateMonth.date().year(),self.ui.dateMonth.date().month())),self.ui.dateMonth.date()))
+        # Khi nhấn vào table vocabylary thì sẽ binding dữ liệu sang form
+        self.ui.tlwBoxWord.clicked.connect(lambda:UIFunctions.displayDetailVocabulary(self))
 
         # Đổi tên Box theo số từ còn lại ở trong Box
         for i in range(1,6):

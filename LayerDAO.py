@@ -120,6 +120,16 @@ def findPractice(status,level):
     cur.execute(sql,par)
     myresult = cur.fetchall()
     return myresult
+
+# Lấy lên những từ đã luyện tập vào ngày hôm nay để xem kết quả ở tất cả các hộp
+def findAllPractice(status):
+    myconn=getConnection()
+    cur = myconn.cursor()
+    sql = "select word.* from word,review where word.id=review.id_Word and status=%s and date_practice=%s "
+    par =(status,date.today())
+    cur.execute(sql,par)
+    myresult = cur.fetchall()
+    return myresult
     
 # Cập nhật status là 1 nếu trả lời đúng, 0 nếu trả lời sai
 def updateStatus(id,status):
