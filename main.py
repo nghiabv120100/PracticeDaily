@@ -76,7 +76,6 @@ class MainWindow(QMainWindow):
             lstPracticeBox5=lstBox5[0:length]
             #############################
             #insert vào mỗi Box 5 từ 
-            print("nghiahsg")
             for item in lstPracticeBox1:
                 addReview(item[0])
             for item in lstPracticeBox2:
@@ -105,7 +104,7 @@ class MainWindow(QMainWindow):
         # PAGE 1
         #Box Source
         self.ui.btn_page_1.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_1))
-        self.ui.btn_page_1.clicked.connect(lambda:UIFunctions.mapping(self,0))
+        self.ui.btn_page_1.clicked.connect(lambda:UIFunctions.assignLevel(self,0))
         # Box 1
         self.ui.btn_page_2.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_2))
         self.ui.btn_page_2.clicked.connect(lambda:UIFunctions.mapping(self,1))
@@ -126,24 +125,24 @@ class MainWindow(QMainWindow):
         self.ui.btn_page_7.clicked.connect(lambda:UIFunctions.mapping(self,6))
         # Box Custom
         self.ui.btnCustom.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_2))
-        self.ui.btnCustom.clicked.connect(lambda:UIFunctions.mapping(self,0))
+        self.ui.btnCustom.clicked.connect(lambda:UIFunctions.mapping(self,-1))
         # Box Recruitment
         self.ui.btnRecruitment.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_2))
-        self.ui.btnRecruitment.clicked.connect(lambda:UIFunctions.mapping(self,-1))
+        self.ui.btnRecruitment.clicked.connect(lambda:UIFunctions.mapping(self,-2))
         # Box Workplace
         self.ui.btnWorkplace.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_2))
-        self.ui.btnWorkplace.clicked.connect(lambda:UIFunctions.mapping(self,-2))
+        self.ui.btnWorkplace.clicked.connect(lambda:UIFunctions.mapping(self,-3))
         # Box Bussiness
         self.ui.btnBussiness.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_2))
-        self.ui.btnBussiness.clicked.connect(lambda:UIFunctions.mapping(self,-3))
+        self.ui.btnBussiness.clicked.connect(lambda:UIFunctions.mapping(self,-4))
         # Box Shopping
         self.ui.btnShopping.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_2))
-        self.ui.btnShopping.clicked.connect(lambda:UIFunctions.mapping(self,-4))
+        self.ui.btnShopping.clicked.connect(lambda:UIFunctions.mapping(self,-5))
         # Box Travel
         self.ui.btnTravel.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_2))
-        self.ui.btnTravel.clicked.connect(lambda:UIFunctions.mapping(self,-5))
+        self.ui.btnTravel.clicked.connect(lambda:UIFunctions.mapping(self,-6))
 
-        #Edit
+        #Edit or Save
         self.ui.btn_edit.clicked.connect(lambda:UIFunctions.edit_Vocabulary(self))
         #Delete
         self.ui.btn_delete.clicked.connect(lambda:UIFunctions.delete_Vocabulary(self))

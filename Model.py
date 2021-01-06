@@ -7,6 +7,7 @@ class Word:
         self.image = ""
         self.level_box = 0
         self.part_of_speech = ""
+        self.eg=""
         self.next = None    
 
     # def __init__(self, id, vocabulary, means, image, level_box, part_of_speech):
@@ -23,8 +24,5 @@ class Review:
         self.id_word = id_word
         self.status =status
         self.next = None
-class Cons:
-    
-    def __init__(self): 
-        self.numwords = 0 
+
          

@@ -10,6 +10,7 @@ Create table Word
     image nvarchar(255), -- lưu link đến vị trí để ảnh
     level_box int, -- Tuơng ứng với vị trí ở hộp 0: Source, 1: Box1, 2:Box2....
 	part_of_speech varchar(50),
+    eg nvarchar(1000),
     primary key(id)
 );
 

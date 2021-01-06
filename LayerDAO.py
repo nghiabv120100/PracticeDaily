@@ -50,8 +50,8 @@ def find_by_level_box(level):
 def add(word):
     myconn=getConnection()
     cur = myconn.cursor()
-    sql="Insert into word(vocabulary,means,image,level_box,part_of_speech) values(%s,%s,%s,%s,%s)"
-    par =(word.vocabulary,word.means,word.image,word.level_box,word.part_of_speech)
+    sql="Insert into word(vocabulary,means,image,level_box,part_of_speech,eg) values(%s,%s,%s,%s,%s,%s)"
+    par =(word.vocabulary,word.means,word.image,word.level_box,word.part_of_speech,word.eg)
     try:
         cur.execute(sql,par)
         myconn.commit()
@@ -74,8 +74,8 @@ def move(id):
 def update(word):
     myconn=getConnection()
     cur = myconn.cursor()
-    sql="Update word set vocabulary=%s,means=%s,image=%s,level_box=%s,part_of_speech=%s where id=%s"
-    par =(word.vocabulary,word.means,word.image,word.level_box,word.part_of_speech,word.id)
+    sql="Update word set vocabulary=%s,means=%s,image=%s,level_box=%s,part_of_speech=%s,eg=%s where id=%s"
+    par =(word.vocabulary,word.means,word.image,word.level_box,word.part_of_speech,word.eg,word.id)
     try:
         cur.execute(sql,par)
         myconn.commit()

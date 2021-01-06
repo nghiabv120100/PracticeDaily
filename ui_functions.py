@@ -90,6 +90,10 @@ class UIFunctions(MainWindow):
 
     def mapping(self,level):
         global actionEdit
+        if actionEdit ==2 or actionEdit ==3:        # Lúc đang thêm hoặc chỉnh sửa thì ko được chuyển sang chế độ khác
+            showdialog("Bạn đang ở chế độ chỉnh sửa")
+            return
+
         actionEdit=0
         self.ui.level=level
         self.ui.lstWord=find_by_level_box(level) 
@@ -131,6 +135,7 @@ class UIFunctions(MainWindow):
         self.ui.txt_vocabulary.setText(word[1])
         self.ui.txt_partofspeech.setText(word[5])
         self.ui.txt_meaning.setText(word[2])
+        self.ui.txt_eg.setText(word[6])
         self.ui.btn_image.setStyleSheet("border-image : url(image/"+word[3]+");") 
 
 
@@ -155,8 +160,10 @@ class UIFunctions(MainWindow):
             word.image=UIFunctions.saveName
             word.level_box=self.ui.level
             word.part_of_speech=self.ui.txt_partofspeech.toPlainText()
+            word.eg=self.ui.txt_eg.toPlainText()
             flag=update(word)
             if flag==1:
+                actionEdit=0
                 showdialog("Update Success")
                 UIFunctions.mapping(self,self.ui.level)
                 UIFunctions.clearTextEdit(self)
@@ -172,8 +179,10 @@ class UIFunctions(MainWindow):
             word.image=UIFunctions.saveName
             word.level_box=self.ui.level
             word.part_of_speech=self.ui.txt_partofspeech.toPlainText()
+            word.eg=self.ui.txt_eg.toPlainText()
             flag=add(word)
             if flag==1:
+                actionEdit=0
                 showdialog("Addition Success")
                 UIFunctions.mapping(self,self.ui.level)
                 UIFunctions.clearTextEdit(self)
@@ -214,7 +223,7 @@ class UIFunctions(MainWindow):
     
     #Lấy mỗi hộp 5 từ để luyên tập
     def findListPractice(self):
-        if self.ui.level >5 :
+        if self.ui.level >5 or self.ui.level==0:
             return
         elif self.ui.level < 1: # Đổi practice thành Add
             global actionEdit
@@ -263,7 +272,7 @@ class UIFunctions(MainWindow):
             return 
         # voice=self.txtVoice.text()
         word = self.ui.lstPractice.pop(0)
-        if vocabulary.lower() == voca.lower() or vocabulary.lower()==self.ui.voice.lower():
+        if vocabulary.lower() == voca.lower() or vocabulary.lower() in self.ui.lstVoice:
             self.ui.lstCorrect.append(word)
             updateStatus(word[0],1)
             showdialog("Correct")
@@ -276,13 +285,14 @@ class UIFunctions(MainWindow):
 
     #Hàm nghe để kiểm tra phát âm
     def listenning(self):
-        if len(self.ui.lstVoice) >=3 or self.ui.lstPractice[0][1] in self.ui.lstVoice :   # Nếu phát âm 3 lần thì ko cho phát âm nữa
+        if len(self.ui.lstVoice) >=3 or self.ui.lstPractice[0][1] in self.ui.lstVoice :   # Nếu phát âm đúng hoặc 3 lần thì ko cho phát âm nữa
             return 
 
         robot_ear =speech_recognition.Recognizer()
         with speech_recognition.Microphone() as mic:
+            robot_ear.adjust_for_ambient_noise(mic) # Giảm độ ồn của mic
             print("Robot: I'm Listening")
-            audio = robot_ear.record(mic,duration=2)
+            audio = robot_ear.record(mic,duration=0.5) 
             
         try:
             self.ui.voice = robot_ear.recognize_google(audio)
@@ -290,6 +300,10 @@ class UIFunctions(MainWindow):
         except:
             self.ui.voice ="..."
         self.ui.lstVoice.append(self.ui.voice)
+        if self.ui.voice ==self.ui.lstPractice[0][1]:
+            self.ui.lbl_icon.setStyleSheet("border-image : url(image/correct-icon.png);") 
+        else:
+            self.ui.lbl_icon.setStyleSheet("border-image : url(image/wrong-icon.png);") 
         print(self.ui.lstVoice)
     
     # Đọc từ vựng ở trong ô text
@@ -368,6 +382,10 @@ class UIFunctions(MainWindow):
     # gán level
     def assignLevel(self,level):
         self.ui.level=level
+        global actionEdit
+        actionEdit=0
+        if level >=0:
+            self.ui.btn_review.setText(QCoreApplication.translate("MainWindow", u"Review", None))  
 
     #Mở khoá text edit
     def enableTextEdit(self):

@@ -406,6 +406,12 @@ class Ui_MainWindow(object):
         self.lblPicture = QtWidgets.QLabel(self.frmPractice)
         self.lblPicture.setGeometry(QtCore.QRect(270, 0, 221, 171))
         self.lblPicture.setObjectName("lblPicture")
+
+        self.lbl_icon = QLabel(self.frmPractice)
+        self.lbl_icon.setObjectName(u"lbl_icon")
+        self.lbl_icon.setGeometry(QtCore.QRect(220, 300, 40, 40))
+        
+
         self.label = QtWidgets.QLabel(self.frmPractice)
         self.label.setGeometry(QtCore.QRect(200, 190, 101, 51))
         font = QtGui.QFont()
