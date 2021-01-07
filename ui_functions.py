@@ -431,6 +431,7 @@ class UIFunctions(MainWindow):
         self.ui.txt_partofspeech.setText("")
         self.ui.txt_meaning.setText("")
         self.ui.txt_eg.setText("")
+        self.ui.btn_image.setStyleSheet("border-image : url(image/000.jpg);") 
 
   
 
