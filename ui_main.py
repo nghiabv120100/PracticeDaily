@@ -423,7 +423,7 @@ class Ui_MainWindow(object):
 
         self.lbl_icon = QLabel(self.frmPractice)
         self.lbl_icon.setObjectName(u"lbl_icon")
-        self.lbl_icon.setGeometry(QtCore.QRect(300, 250, 40, 40))
+        self.lbl_icon.setGeometry(QtCore.QRect(230, 300, 40, 40))
         
         self.lbl_icon_vocabulary = QLabel(self.frmPractice)
         self.lbl_icon_vocabulary.setObjectName(u"lbl_icon_vocabulary")
@@ -480,7 +480,7 @@ class Ui_MainWindow(object):
         self.btnCancel.setObjectName("btnCancel")
         self.btnCancel.setStyleSheet("color: rgb(255,255,255);")
         self.stackedWidget.addWidget(self.frmPractice)
-        self.lblPicture.setText(QCoreApplication.translate("MainWindow", "This is picture"))
+        self.lblPicture.setText(QCoreApplication.translate("MainWindow", ""))
         self.label.setText(QCoreApplication.translate("MainWindow", "Means:"))
         self.label_2.setText(QCoreApplication.translate("MainWindow", "Vocabulary:"))
         self.btnMic.setText(QCoreApplication.translate("MainWindow", "Mic"))
@@ -772,7 +772,7 @@ class Ui_MainWindow(object):
         self.label_2.setText(QCoreApplication.translate("Form", "P Of Speech: :"))
         self.label_3.setText(QCoreApplication.translate("Form", "Meaning:"))
         self.label_4.setText(QCoreApplication.translate("Form", "Eg: "))
-        self.btn_image.setText(QCoreApplication.translate("Form", "This is image"))
+        self.btn_image.setText(QCoreApplication.translate("Form", ""))
         self.txt_vocabulary.setHtml(QCoreApplication.translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"

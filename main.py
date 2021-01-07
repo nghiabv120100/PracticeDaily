@@ -95,7 +95,7 @@ class MainWindow(QMainWindow):
         self.loadVocabulary()
         ## TOGGLE/BURGUER MENU
         ########################################################################
-        self.ui.Btn_Toggle.clicked.connect(lambda: UIFunctions.toggleMenu(self, 250, True))
+        # self.ui.Btn_Toggle.clicked.connect(lambda: UIFunctions.toggleMenu(self, 250, True))
 
         ## PAGES
         ########################################################################

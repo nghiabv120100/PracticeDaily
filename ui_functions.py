@@ -232,6 +232,8 @@ class UIFunctions(MainWindow):
                 showdialog("Delete Success")
                 UIFunctions.mapping(self,self.ui.level)
                 UIFunctions.clearTextEdit(self)
+                if self.ui.level > 0 and self.ui.level <6:
+                    UIFunctions.renameBox(self,self.ui.level)
             else:
                 showdialog("Delete Fail")  
         else:
@@ -312,14 +314,14 @@ class UIFunctions(MainWindow):
         with speech_recognition.Microphone() as mic:
             robot_ear.adjust_for_ambient_noise(mic) # Giảm độ ồn của mic
             print("Robot: I'm Listening")
-            audio = robot_ear.record(mic,duration=1.5) 
+            audio = robot_ear.record(mic,duration=2) 
             
         try:
             self.ui.voice = robot_ear.recognize_google(audio)
             print(self.ui.voice)
         except:
             self.ui.voice ="..."
-        self.ui.lstVoice.append(self.ui.voice)
+        self.ui.lstVoice.append(self.ui.voice.lower())
         if self.ui.lstPractice[0][1] in self.ui.lstVoice:
             self.ui.lbl_icon.setStyleSheet("border-image : url(image/correct-icon.jpg);") 
         else:
