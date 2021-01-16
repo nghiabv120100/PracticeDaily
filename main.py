@@ -172,7 +172,13 @@ class MainWindow(QMainWindow):
         # Xem thống kê tình hình học tập từ ngày A đến ngày B
         self.ui.btnShowResultByDay.clicked.connect(lambda: drawGraph(self.ui.dateFrom.date(),self.ui.dateTo.date()))
         # Xem thống kê tình hình học tập trong tháng
-        self.ui.btnShowResultByMonth.clicked.connect(lambda: drawGraph(QDate(self.ui.dateMonth.date().year(),self.ui.dateMonth.date().month(),numberOfDays(self.ui.dateMonth.date().year(),self.ui.dateMonth.date().month())),self.ui.dateMonth.date()))
+        self.ui.btnShowResultByMonth.clicked.connect(lambda: drawGraph(self.ui.dateMonth.date(),QDate(self.ui.dateMonth.date().year(),self.ui.dateMonth.date().month(),numberOfDays(self.ui.dateMonth.date().year(),self.ui.dateMonth.date().month()))))
+        # Xuất ra excel tình hình học tập từ ngày A đến ngày B
+        self.ui.btnExportResultByDay.clicked.connect(lambda: exportToExcel(self.ui.dateFrom.date(),self.ui.dateTo.date()))
+        # Xem thống kê tình hình học tập trong tháng
+        self.ui.btnExportResultByMonth.clicked.connect(lambda: exportToExcel(self.ui.dateMonth.date(),QDate(self.ui.dateMonth.date().year(),self.ui.dateMonth.date().month(),numberOfDays(self.ui.dateMonth.date().year(),self.ui.dateMonth.date().month()))))
+       
+        
         # Khi nhấn vào table vocabylary thì sẽ binding dữ liệu sang form
         self.ui.tlwBoxWord.clicked.connect(lambda:UIFunctions.displayDetailVocabulary(self))
         # Khi nhấn vào button chọn hình ảnh

@@ -570,6 +570,32 @@ class Ui_MainWindow(object):
         self.btnShowResultByDay.setObjectName("btnShowResultByDay")
         self.label = QtWidgets.QLabel(self.frame)
         self.label.setGeometry(QtCore.QRect(80, 180, 55, 16))
+
+        #Export Excel ##################################################################################################
+
+        self.btnExportResultByDay = QtWidgets.QPushButton(self.frame)
+        self.btnExportResultByDay.setGeometry(QtCore.QRect(170, 350, 141, 41))
+        
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.btnExportResultByDay.setFont(font)
+        self.btnExportResultByDay.setStyleSheet("color: rgb(255, 255, 255);\n"
+"background: rgb(167, 167, 167)")
+        self.btnExportResultByDay.setObjectName("btnExportResultByDay")
+
+        self.btnExportResultByMonth = QtWidgets.QPushButton(self.frame)
+        self.btnExportResultByMonth.setGeometry(QtCore.QRect(480, 350, 141, 41))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.btnExportResultByMonth.setFont(font)
+        self.btnExportResultByMonth.setStyleSheet("color: rgb(255, 255, 255);\n"
+"background: rgb(167, 167, 167)")
+        self.btnExportResultByMonth.setObjectName("btnExportResultByMonth")
+#############################################################################################################################
+        #End Export   
+
+
+
         font = QtGui.QFont()
         font.setPointSize(12)
         self.label.setFont(font)
@@ -597,6 +623,7 @@ class Ui_MainWindow(object):
         self.dateMonth.setFont(font)
         self.dateMonth.setStyleSheet("color: rgb(255, 255, 255)")
         self.dateMonth.setObjectName("dateMonth")
+        self.dateMonth.setDateTime(QtCore.QDateTime(QtCore.QDate(2021, 1 , 1), QtCore.QTime(0, 0, 0)))
         self.label_3 = QtWidgets.QLabel(self.frame)
         self.label_3.setGeometry(QtCore.QRect(390, 220, 71, 16))
         font = QtGui.QFont()
@@ -632,6 +659,8 @@ class Ui_MainWindow(object):
         self.dateMonth.setDisplayFormat(QCoreApplication.translate("Form", "M/yyyy"))
         self.label_3.setText(QCoreApplication.translate("Form", "Month:"))
         self.btnShowResultByMonth.setText(QCoreApplication.translate("Form", "Show Result"))
+        self.btnExportResultByDay.setText(QCoreApplication.translate("Form", "Export Result"))
+        self.btnExportResultByMonth.setText(QCoreApplication.translate("Form", "Export Result"))
         self.label_4.setText(QCoreApplication.translate("Form", "Thống kê kết quả."))
         
         # Tạo form add

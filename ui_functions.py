@@ -57,6 +57,9 @@ class UIFunctions(MainWindow):
         filename = filedialog.askopenfile()
         return filename
     def loadImage(self):
+        global actionEdit
+        if actionEdit !=2 and actionEdit !=3:  # Nếu không phải thêm hoặc sửa
+            return 
         f = UIFunctions.openfn(UIFunctions)
         if f == None:
             return
@@ -161,6 +164,9 @@ class UIFunctions(MainWindow):
             word.level_box=self.ui.level
             word.part_of_speech=self.ui.txt_partofspeech.toPlainText()
             word.eg=self.ui.txt_eg.toPlainText()
+            if word.vocabulary == ""  or word.means == "":###########################
+                showdialog("Vui lòng điền đầy đủ")
+                return 
             flag=update(word)
             if flag==1:
                 actionEdit=0
@@ -180,6 +186,9 @@ class UIFunctions(MainWindow):
             word.level_box=self.ui.level
             word.part_of_speech=self.ui.txt_partofspeech.toPlainText()
             word.eg=self.ui.txt_eg.toPlainText()
+            if word.vocabulary == ""  or word.means == "":###########################
+                showdialog("Vui lòng điền đầy đủ")
+                return 
             flag=add(word)
             if flag==1:
                 actionEdit=0
@@ -207,19 +216,25 @@ class UIFunctions(MainWindow):
     # Hàm xoá từ vựng
     def delete_Vocabulary(self):
         global actionEdit
-        if actionEdit !=1: # Khi nhấn vào cell của table thì action edit =1
-            return 
-        index=self.ui.tlwBoxWord.currentRow()-1
-        if index < 0:
-            return
-        id = self.ui.lstWord[index][0]
-        print(id)
-        if delete(id)==1:
-            showdialog("Delete Success")
-            UIFunctions.mapping(self,self.ui.level)
-            UIFunctions.clearTextEdit(self)
+        root.withdraw()
+        resp = tk.messagebox.askquestion ('Warning','Do you want to delete?',icon = 'warning')
+        if resp=="yes":
+            if actionEdit !=1: # Khi nhấn vào cell của table thì action edit =1
+                return 
+            index=self.ui.tlwBoxWord.currentRow()-1
+            if index < 0:
+                return
+            id = self.ui.lstWord[index][0]
+            print(id)
+            if delete(id)==1:
+                showdialog("Delete Success")
+                UIFunctions.mapping(self,self.ui.level)
+                UIFunctions.clearTextEdit(self)
+            else:
+                showdialog("Delete Fail")  
         else:
-            showdialog("Delete Fail")  
+            pass
+        
     
     #Lấy mỗi hộp 5 từ để luyên tập
     def findListPractice(self):
@@ -243,6 +258,7 @@ class UIFunctions(MainWindow):
         # Làm mới Form
         self.ui.txtMeans.setText("")
         self.ui.lblPicture.setStyleSheet("border-image : url(image/000.jpg);") 
+        self.ui.lbl_icon.setStyleSheet("border-image : url(image/None.jpg);") 
         self.ui.txtVocabulary.setText("")
         #self.ui.txtVoice.setText("")
         # Kiểm tra xem hôm nay đã luyện tập xong chưa
@@ -286,13 +302,14 @@ class UIFunctions(MainWindow):
     #Hàm nghe để kiểm tra phát âm
     def listenning(self):
         if len(self.ui.lstVoice) >=3 or self.ui.lstPractice[0][1] in self.ui.lstVoice :   # Nếu phát âm đúng hoặc 3 lần thì ko cho phát âm nữa
+            showdialog("Bạn không thể dùng chức năng này nữa.")
             return 
-
+        
         robot_ear =speech_recognition.Recognizer()
         with speech_recognition.Microphone() as mic:
             robot_ear.adjust_for_ambient_noise(mic) # Giảm độ ồn của mic
             print("Robot: I'm Listening")
-            audio = robot_ear.record(mic,duration=0.5) 
+            audio = robot_ear.record(mic,duration=1.5) 
             
         try:
             self.ui.voice = robot_ear.recognize_google(audio)
@@ -300,10 +317,10 @@ class UIFunctions(MainWindow):
         except:
             self.ui.voice ="..."
         self.ui.lstVoice.append(self.ui.voice)
-        if self.ui.voice ==self.ui.lstPractice[0][1]:
-            self.ui.lbl_icon.setStyleSheet("border-image : url(image/correct-icon.png);") 
+        if self.ui.lstPractice[0][1] in self.ui.lstVoice:
+            self.ui.lbl_icon.setStyleSheet("border-image : url(image/correct-icon.jpg);") 
         else:
-            self.ui.lbl_icon.setStyleSheet("border-image : url(image/wrong-icon.png);") 
+            self.ui.lbl_icon.setStyleSheet("border-image : url(image/wrong-icon.jpg);") 
         print(self.ui.lstVoice)
     
     # Đọc từ vựng ở trong ô text
@@ -445,4 +462,20 @@ def numberOfDays(y, m):
       if m in list:
          return 31
       return 30
+
+import xlwt
+def exportToExcel(dateFrom,dateTo):
+
+    # import the modules
+    #from pymysql import*
+    
+    #import pandas.io.sql as sql
+    # connect the mysql with the python
+    #con=connect(user="root",password="123456",host="127.0.0.1",database="NNLTTT")
+    # read the data
+    df=getResultPractice(dateFrom,dateTo)
+    # print the data
+    # print(df)
+    # export the data into the excel sheet
+    df.to_excel('ds.xls')
 

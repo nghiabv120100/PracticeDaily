@@ -196,3 +196,22 @@ def totalResult(dateFrom,dateTo):
         lstTrue.append((countTrue,x))
         lstFalse.append((countFalse,x))
     return lstTrue,lstFalse
+
+import pandas.io.sql as sql
+def getResultPractice(dateFrom,dateTo):
+    myconn=getConnection()
+    # cur = myconn.cursor()
+    # print(dateFrom.toString("yyyy-MM-dd"))
+    # print(dateTo.toString("yyyy-MM-dd"))
+    # sql = "select * from review where date_practice >=%s and date_practice <=%s  "
+    # par =(dateFrom.toString("yyyy-MM-dd"),dateTo.toString("yyyy-MM-dd"))
+    # cur.execute(sql,par)
+    # myresult = cur.fetchall()
+    qsql="select id,vocabulary,means,level_box,part_of_speech,eg,status,date_practice from word,review where id=id_Word and date_practice >='"+dateFrom.toString("yyyy-MM-dd")+"' and date_practice <='"+dateTo.toString("yyyy-MM-dd")+"'"
+    print(qsql)
+    # par =(,dateTo.toString("yyyy-MM-dd"))
+    myresult= sql.read_sql(qsql,myconn)
+    print(myresult)
+    
+    return myresult
+
