@@ -18,7 +18,9 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 from PIL import ImageTk,Image
 import matplotlib.pyplot as plt
-
+import xlwt
+import time
+from threading import Event,Timer
 spell = SpellChecker()
 root= tk.Tk()
 root.withdraw()
@@ -216,11 +218,11 @@ class UIFunctions(MainWindow):
     # Hàm xoá từ vựng
     def delete_Vocabulary(self):
         global actionEdit
+        if actionEdit !=1: # Khi nhấn vào cell của table thì action edit =1
+                return 
         root.withdraw()
         resp = tk.messagebox.askquestion ('Warning','Do you want to delete?',icon = 'warning')
-        if resp=="yes":
-            if actionEdit !=1: # Khi nhấn vào cell của table thì action edit =1
-                return 
+        if resp=="yes":      
             index=self.ui.tlwBoxWord.currentRow()-1
             if index < 0:
                 return
@@ -254,7 +256,6 @@ class UIFunctions(MainWindow):
 
     #Hiển thị từ vựng lên form Practice
     def displayPractice(self):
-        print("display")
         # Làm mới Form
         self.ui.txtMeans.setText("")
         self.ui.lblPicture.setStyleSheet("border-image : url(image/000.jpg);") 
@@ -276,6 +277,7 @@ class UIFunctions(MainWindow):
                 self.ui.lblPicture.setStyleSheet("border-image : url(image/"+word[3]+");") 
             else:
                 self.ui.lblPicture.setStyleSheet("border-image : url(image/000.jpg);") 
+
     #Hàm kiểm tra xem câu trả lời có chính xác hay không
     def isCorrect(self,vocabulary):
         #Xoá hết từ xong danh sách vừa phát âm
@@ -289,15 +291,16 @@ class UIFunctions(MainWindow):
         # voice=self.txtVoice.text()
         word = self.ui.lstPractice.pop(0)
         if vocabulary.lower() == voca.lower() or vocabulary.lower() in self.ui.lstVoice:
+            self.ui.lbl_icon_vocabulary.setStyleSheet("border-image : url(image/correct-icon.jpg);")    
             self.ui.lstCorrect.append(word)
-            updateStatus(word[0],1)
-            showdialog("Correct")
-            UIFunctions.displayPractice(self)
+            updateStatus(word[0],1)    
+              
         else:
+            self.ui.lbl_icon_vocabulary.setStyleSheet("border-image : url(image/wrong-icon.jpg);") 
             self.ui.lstWrong.append(word)
-            updateStatus(word[0],0)
-            showdialog("wrong")
-            UIFunctions.displayPractice(self)
+            updateStatus(word[0],0)  
+        start_timer(self,timer_func, 2)
+    
 
     #Hàm nghe để kiểm tra phát âm
     def listenning(self):
@@ -428,7 +431,8 @@ class UIFunctions(MainWindow):
         self.ui.txt_partofspeech.setText("")
         self.ui.txt_meaning.setText("")
         self.ui.txt_eg.setText("")
-       
+
+  
 
 def drawGraph(dateFrom,dateTo):
     d1,d2 = totalResult(dateFrom,dateTo)
@@ -463,19 +467,29 @@ def numberOfDays(y, m):
          return 31
       return 30
 
-import xlwt
+#Xuất ra file excel
 def exportToExcel(dateFrom,dateTo):
-
-    # import the modules
-    #from pymysql import*
-    
-    #import pandas.io.sql as sql
-    # connect the mysql with the python
-    #con=connect(user="root",password="123456",host="127.0.0.1",database="NNLTTT")
-    # read the data
     df=getResultPractice(dateFrom,dateTo)
-    # print the data
-    # print(df)
-    # export the data into the excel sheet
     df.to_excel('ds.xls')
+
+#Tạm dừng 2s để xem kết quả
+def start_timer(self,slot, count=1, interval=1000):
+    counter = 0
+    def handler():
+        nonlocal counter
+        counter += 1
+        slot(self,counter)
+        if counter >= count:
+            timer.stop()
+            timer.deleteLater()
+    timer = QtCore.QTimer()
+    timer.timeout.connect(handler)
+    timer.start(interval)
+
+def timer_func(self,count):
+    if count == 2:
+        UIFunctions.displayPractice(self)
+        self.ui.lbl_icon_vocabulary.setStyleSheet("border-image : url(image/None.jpg);")    
+
+
 

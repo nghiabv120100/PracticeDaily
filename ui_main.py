@@ -211,7 +211,9 @@ class Ui_MainWindow(object):
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(85, 170, 255);\n"
-"}")
+"}"
+"	QPushButton:focus {background-color:rgb(85, 0, 255);}\n"
+)
 
         self.verticalLayout_4.addWidget(self.btn_page_1)
 
@@ -225,7 +227,9 @@ class Ui_MainWindow(object):
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(85, 170, 255);\n"
-"}")
+"}"
+"	QPushButton:focus {background-color:rgb(85, 0, 255);}\n"
+)
 
         self.verticalLayout_4.addWidget(self.btn_page_2)
 
@@ -239,7 +243,9 @@ class Ui_MainWindow(object):
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(85, 170, 255);\n"
-"}")
+"}"
+"	QPushButton:focus {background-color:rgb(85, 0, 255);}\n"
+)
 
         self.verticalLayout_4.addWidget(self.btn_page_3)
 
@@ -255,7 +261,9 @@ class Ui_MainWindow(object):
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(85, 170, 255);\n"
-"}")
+"}"
+"	QPushButton:focus {background-color:rgb(85, 0, 255);}\n"
+)
         self.verticalLayout_4.addWidget(self.btn_page_4)
         #Tạo button page_5
         
@@ -269,7 +277,9 @@ class Ui_MainWindow(object):
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(85, 170, 255);\n"
-"}")
+"}"
+"	QPushButton:focus {background-color:rgb(85, 0, 255);}\n"
+)
 
         self.verticalLayout_4.addWidget(self.btn_page_5)
 
@@ -288,7 +298,9 @@ class Ui_MainWindow(object):
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(85, 170, 255);\n"
-"}")
+"}"
+"	QPushButton:focus {background-color:rgb(85, 0, 255);}\n"
+)
 
         self.verticalLayout_4.addWidget(self.btn_page_6)
         #Tạo button page_7
@@ -303,7 +315,9 @@ class Ui_MainWindow(object):
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(85, 170, 255);\n"
-"}")
+"}"
+"	QPushButton:focus {background-color:rgb(85, 0, 255);}\n"
+)
 
         self.verticalLayout_4.addWidget(self.btn_page_7)
         
@@ -409,8 +423,11 @@ class Ui_MainWindow(object):
 
         self.lbl_icon = QLabel(self.frmPractice)
         self.lbl_icon.setObjectName(u"lbl_icon")
-        self.lbl_icon.setGeometry(QtCore.QRect(220, 300, 40, 40))
+        self.lbl_icon.setGeometry(QtCore.QRect(300, 250, 40, 40))
         
+        self.lbl_icon_vocabulary = QLabel(self.frmPractice)
+        self.lbl_icon_vocabulary.setObjectName(u"lbl_icon_vocabulary")
+        self.lbl_icon_vocabulary.setGeometry(QtCore.QRect(530, 240, 40, 40))
 
         self.label = QtWidgets.QLabel(self.frmPractice)
         self.label.setGeometry(QtCore.QRect(200, 190, 101, 51))
@@ -547,7 +564,7 @@ class Ui_MainWindow(object):
 
         #Tạo form thống kê kết quả
         self.frame = QtWidgets.QFrame(self.page_3)
-        self.frame.setGeometry(QtCore.QRect(110, 50, 701, 411))
+        self.frame.setGeometry(QtCore.QRect(0, 0, 701, 411))
         self.frame.setStyleSheet("background:rgb(45,45,45) ")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -584,7 +601,7 @@ class Ui_MainWindow(object):
         self.btnExportResultByDay.setObjectName("btnExportResultByDay")
 
         self.btnExportResultByMonth = QtWidgets.QPushButton(self.frame)
-        self.btnExportResultByMonth.setGeometry(QtCore.QRect(480, 350, 141, 41))
+        self.btnExportResultByMonth.setGeometry(QtCore.QRect(540, 350, 141, 41))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.btnExportResultByMonth.setFont(font)
@@ -617,7 +634,7 @@ class Ui_MainWindow(object):
         self.dateFrom.setStyleSheet("color: rgb(255, 255, 255)")
         self.dateFrom.setObjectName("dateFrom")
         self.dateMonth = QtWidgets.QDateEdit(self.frame)
-        self.dateMonth.setGeometry(QtCore.QRect(480, 210, 141, 31))
+        self.dateMonth.setGeometry(QtCore.QRect(540, 210, 141, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.dateMonth.setFont(font)
@@ -625,14 +642,14 @@ class Ui_MainWindow(object):
         self.dateMonth.setObjectName("dateMonth")
         self.dateMonth.setDateTime(QtCore.QDateTime(QtCore.QDate(2021, 1 , 1), QtCore.QTime(0, 0, 0)))
         self.label_3 = QtWidgets.QLabel(self.frame)
-        self.label_3.setGeometry(QtCore.QRect(390, 220, 71, 16))
+        self.label_3.setGeometry(QtCore.QRect(470, 220, 71, 16))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.label_3.setFont(font)
         self.label_3.setStyleSheet("color: rgb(255, 255, 255)")
         self.label_3.setObjectName("label_3")
         self.btnShowResultByMonth = QtWidgets.QPushButton(self.frame)
-        self.btnShowResultByMonth.setGeometry(QtCore.QRect(480, 270, 141, 41))
+        self.btnShowResultByMonth.setGeometry(QtCore.QRect(540, 270, 141, 41))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.btnShowResultByMonth.setFont(font)
@@ -640,13 +657,13 @@ class Ui_MainWindow(object):
 "background: rgb(167, 167, 167)")
         self.btnShowResultByMonth.setObjectName("btnShowResultByMonth")
         self.label_4 = QtWidgets.QLabel(self.frame)
-        self.label_4.setGeometry(QtCore.QRect(230, 50, 271, 41))
+        self.label_4.setGeometry(QtCore.QRect(300, 30, 271, 41))
         font = QtGui.QFont()
         font.setPointSize(16)
         font.setBold(True)
         font.setWeight(75)
         self.label_4.setFont(font)
-        self.label_4.setStyleSheet("color: rgb(0, 0, 127)")
+        self.label_4.setStyleSheet("color: white")
         self.label_4.setObjectName("label_4")
 
         self.retranslateUi(self.page_3)

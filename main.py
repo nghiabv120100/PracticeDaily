@@ -96,7 +96,6 @@ class MainWindow(QMainWindow):
         ## TOGGLE/BURGUER MENU
         ########################################################################
         self.ui.Btn_Toggle.clicked.connect(lambda: UIFunctions.toggleMenu(self, 250, True))
-        
 
         ## PAGES
         ########################################################################
@@ -177,7 +176,7 @@ class MainWindow(QMainWindow):
         self.ui.btnExportResultByDay.clicked.connect(lambda: exportToExcel(self.ui.dateFrom.date(),self.ui.dateTo.date()))
         # Xem thống kê tình hình học tập trong tháng
         self.ui.btnExportResultByMonth.clicked.connect(lambda: exportToExcel(self.ui.dateMonth.date(),QDate(self.ui.dateMonth.date().year(),self.ui.dateMonth.date().month(),numberOfDays(self.ui.dateMonth.date().year(),self.ui.dateMonth.date().month()))))
-       
+
         
         # Khi nhấn vào table vocabylary thì sẽ binding dữ liệu sang form
         self.ui.tlwBoxWord.clicked.connect(lambda:UIFunctions.displayDetailVocabulary(self))
@@ -295,4 +294,3 @@ if __name__ == "__main__":
         else:
                 MainWindow()
         sys.exit(app.exec_())   
-         
