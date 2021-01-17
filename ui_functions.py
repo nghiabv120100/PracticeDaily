@@ -343,19 +343,17 @@ class UIFunctions(MainWindow):
         if self.ui.level >=0:
             lstCorrect = findPractice(1,self.ui.level)
             lstWrong = findPractice(0,self.ui.level)
-
+            
             if (self.ui.level==0):
                 self.ui.stackedWidget.setCurrentWidget(self.ui.page_2)
                 lstCorrect =findAllPractice(1)
-                print(lstCorrect)
                 lstWrong =findAllPractice(0)
-            print(lstCorrect)
             self.ui.tlwBoxWord.setColumnCount(3)
             self.ui.tlwBoxWord.setRowCount(1)
             self.ui.tlwBoxWord.setItem(0,0, QTableWidgetItem("Vocabulary")) 
             self.ui.tlwBoxWord.setItem(0,1, QTableWidgetItem("Part Of Speech"))
             self.ui.tlwBoxWord.setItem(0,2, QTableWidgetItem("Means"))
-
+            self.ui.lstWord=lstCorrect+lstWrong
             i=1
             for row in lstCorrect:
                 self.ui.tlwBoxWord.setRowCount(i+1)
